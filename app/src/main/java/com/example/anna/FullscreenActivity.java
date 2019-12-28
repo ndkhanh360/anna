@@ -243,7 +243,8 @@ public class FullscreenActivity extends AppCompatActivity {
 
     @Override
     public void onDestroy() {
-//        unregisterReceiver(ReceiverRecord);
+        super.onDestroy();
+//        unregisterReceiver(ReceivondeserRecord);
     }
 
     private void GetTopics() {
