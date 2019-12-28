@@ -27,7 +27,7 @@
     </TextView>
     <ImageView
         android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_height="250dp"
         android:src="@drawable/main_image">
     </ImageView>
     <LinearLayout
