@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetailVocabTest">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="60sp"
+        android:text="Vocabulary"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/pattaya"
+        android:textColor="#006fff"
+        android:layout_marginTop="10sp"
+        android:id="@+id/tvName"/>
+
+    <LinearLayout
+        android:id="@+id/ln_topic"
+        android:layout_width="210sp"
+        android:layout_height="50sp"
+        android:layout_below="@+id/tvName"
+        android:background="@drawable/border"
+        android:backgroundTint="#F7E3F8">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Topic:  "
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_topic_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="SCHOOL "
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvName"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/tick"
+        android:id="@+id/btn_submit"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/lnQA"
+        android:layout_marginTop="60sp"
+        android:layout_below="@+id/ln_topic"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Question"
+            android:textSize="20sp"
+            android:id="@+id/tvQuestion"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editAnswer"
+            android:hint="Enter your answer"
+            android:layout_marginTop="30sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:id="@+id/tvResult"
+            android:hint="Result: "/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30sp"
+                android:layout_marginEnd="50sp"
+                android:id="@+id/btn_check"
+                android:background="@drawable/border"
+                android:backgroundTint="#006fff"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:text="check"
+                android:onClick="btn_onClick_Check"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30sp"
+                android:id="@+id/btn_finish"
+                android:background="@drawable/border"
+                android:backgroundTint="#006fff"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:text="finish"
+                android:onClick="btn_onClick_Finish"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

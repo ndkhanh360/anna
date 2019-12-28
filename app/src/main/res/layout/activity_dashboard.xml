@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_dashboard"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".DashboardActivity"
+    android:descendantFocusability="blocksDescendants"
+    >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:gravity="center"
+            android:text="Speaking Topic"
+            android:textColor="#000"
+            android:textSize="28dp" />
+    <!--   <LinearLayout
+        android:onClick="GotoSingle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimary"
+        android:layout_margin="10dp"
+        android:id="@+id/single_button"
+        >
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/single_icon"
+            android:layout_margin="16dp"
+            android:tint="@color/white_overlay"
+            />
+     <TextView
+            android:textAlignment="center"
+            android:paddingTop="24dp"
+            android:textColor="@color/white_overlay"
+            android:textStyle="bold"
+            android:textSize="28dp"
+            android:text="Single practice"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>-->
+
+
+    <ListView
+        android:id="@+id/listview_tp"
+        android:layout_width="match_parent"
+        android:layout_height="321dp"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        >
+
+        <LinearLayout
+            android:onClick="GotoSingle"
+            android:layout_width="178dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/colorAccent"
+            android:layout_margin="16dp"
+            android:id="@+id/single_button"
+            >
+
+            <TextView
+                android:textAlignment="center"
+                android:textColor="@color/white_overlay"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:padding="16dp"
+                android:text="Self Practice"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:onClick="GotoDouble"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/colorAccent"
+            android:layout_margin="16dp"
+            android:id="@+id/partner_button"
+            >
+
+            <TextView
+                android:textAlignment="center"
+                android:textColor="@color/white_overlay"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:text="Match"
+                android:padding="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:onClick="GotoDouble"
+        android:layout_width="128dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimary"
+        android:layout_margin="10dp"
+        android:layout_gravity="center"
+        android:id="@+id/detail_button"
+        >
+
+        <!--<TextView
+            android:textAlignment="center"
+            android:textColor="@color/white_overlay"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:padding="8dp"
+            android:text="View Detail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>-->
+    </LinearLayout>
+</LinearLayout>

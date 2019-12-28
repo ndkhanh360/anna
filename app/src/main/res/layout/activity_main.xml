@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Anna"
+        android:textSize="90sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/pattaya"
+        android:textColor="#006fff"/>
+
+    <Button
+        android:id="@+id/buttonNew"
+        android:layout_width="220sp"
+        android:layout_height="90sp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30sp"
+        android:background="@drawable/border"
+        android:backgroundTint="#006fff"
+        android:gravity="center"
+        android:text="New member"
+        android:textColor="#ffffff"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/buttonOld"
+        android:layout_width="220sp"
+        android:layout_height="90sp"
+        android:layout_marginBottom="40sp"
+        android:gravity="center"
+        android:background="@drawable/border"
+        android:backgroundTint="#006fff"
+        android:text="Old member"
+        android:textColor="#ffffff"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+
+    <Button
+        android:id="@+id/buttonSkip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/next"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Skip "
+        android:fontFamily="@font/pattaya"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="#006fff"/>
+
+
+
+</LinearLayout>

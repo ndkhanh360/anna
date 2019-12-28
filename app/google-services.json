@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1062610291424",
+    "firebase_url": "https://anna-221c9.firebaseio.com",
+    "project_id": "anna-221c9",
+    "storage_bucket": "anna-221c9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1062610291424:android:155d7cd453ee2f0b395e85",
+        "android_client_info": {
+          "package_name": "com.example.anna"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1062610291424-rjv527d6uuk11jbfspfant23t11ev7ak.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsBkniPTklZdfRwGHj9Zq25Yd73me34kc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1062610291424-rjv527d6uuk11jbfspfant23t11ev7ak.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

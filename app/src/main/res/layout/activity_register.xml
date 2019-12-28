@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_register"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    tools:context="com.pav.anna.Register">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/activity_register"
+        android:gravity="center"
+        android:text="User Sign Up"
+        android:textColor="#000"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/editEmail"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="2dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Enter Email"
+        android:inputType="textEmailAddress"
+        android:textColor="#000" />
+
+
+    <EditText
+        android:id="@+id/editPassword"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editEmail"
+        android:layout_marginTop="2dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Enter Password"
+        android:inputType="textPassword"
+        android:textColor="#000" />
+
+    <EditText
+        android:id="@+id/editName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editPassword"
+        android:layout_marginTop="2dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Enter Name"
+        android:inputType="textEmailAddress"
+        android:textColor="#000" />
+
+
+    <EditText
+        android:id="@+id/editAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editName"
+        android:layout_marginStart="54dp"
+        android:layout_marginTop="3dp"
+        android:layout_toEndOf="@+id/sexSpinner"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Enter Age"
+        android:inputType="textPhonetic"
+        android:textColor="#000" />
+
+    <TextView
+        android:id="@+id/sexTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editName"
+        android:layout_marginTop="6dp"
+        android:gravity="center"
+        android:text="Sex:"
+        android:textColor="#000"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/avatarTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editAge"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:text="Upload Avatar:"
+        android:textColor="#000"
+        android:textSize="20dp" />
+
+    <Spinner
+        android:id="@+id/sexSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editName"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@+id/sexTextView"
+        android:entries="@array/sex_array" />
+
+    <ImageView
+        android:id="@+id/uploadAvatar"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_below="@+id/avatarTextView"
+        android:layout_marginTop="1dp"
+        android:src="@drawable/single_icon" />
+
+    <EditText
+        android:id="@+id/editDescription"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/uploadAvatar"
+        android:layout_marginTop="2dp"
+        android:gravity="center"
+        android:hint="Describe yourself"
+        android:inputType="textMultiLine"
+        android:lines="2"
+        android:scrollbars="vertical"
+        android:textColor="#000" />
+
+    <CheckBox
+        android:id="@+id/checkBeginner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editDescription"
+        android:layout_centerHorizontal="true"
+        android:text="Tôi mới học tiếng Anh" />
+
+    <Button
+        android:id="@+id/buttonRegister"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/checkBeginner"
+        android:layout_marginTop="6dp"
+        android:text="SIGN UP" />
+
+</RelativeLayout>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ScoreBoardActivity"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/ratingTextview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_margin="16dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:text="Your performance"
+        android:textColor="#000"
+        android:textSize="32dp"
+        android:hint="df"/>
+    <TextView
+        android:id="@+id/scoreview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_margin="8dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:text="Score: "
+        android:textColor="#000"
+        android:textSize="32dp"
+        android:hint="df"/>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="316dp"
+        android:id="@+id/listcommentview"
+        android:layout_margin="15dp" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="24dp"
+        android:textSize="24dp"
+        android:text="Done"
+        android:layout_margin="16dp"
+        android:layout_gravity="center"
+        android:onClick="onDonePressed"
+        />
+</LinearLayout>

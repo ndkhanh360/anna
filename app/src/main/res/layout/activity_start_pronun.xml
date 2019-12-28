@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".StartVocab"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="60sp"
+        android:text="Pronunciation"
+        android:fontFamily="@font/pattaya"
+        android:textColor="#006fff"
+        android:layout_marginTop="50sp"/>
+
+    <Button
+        android:layout_width="230sp"
+        android:layout_height="100sp"
+        android:layout_margin="20sp"
+        android:id="@+id/btnStudy"
+        android:textStyle="bold"
+        android:text="STUDY"
+        android:textSize="30sp"
+        android:textColor="#ffffff"
+        android:background="@drawable/border"
+        android:backgroundTint="#f6a2bf"/>
+
+    <Button
+        android:layout_width="230sp"
+        android:layout_height="100sp"
+        android:layout_margin="20sp"
+        android:text="YOUGLISH"
+        android:id="@+id/btnYouGlish"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:textColor="#ffffff"
+        android:background="@drawable/border"
+        android:backgroundTint="#f6a2bf"
+        android:onClick="btn_onClick_YouGlish"/>
+
+    <Button
+        android:layout_width="230sp"
+        android:layout_height="100sp"
+        android:text="TEST"
+        android:layout_marginTop="20sp"
+        android:id="@+id/btnTest"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:textColor="#ffffff"
+        android:background="@drawable/border"
+        android:backgroundTint="#f6a2bf"/>
+
+</LinearLayout>
