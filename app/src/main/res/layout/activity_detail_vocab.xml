@@ -22,6 +22,7 @@
         android:id="@+id/ln_topic"
         android:layout_width="210sp"
         android:layout_height="50sp"
+        android:layout_marginLeft="20dp"
         android:layout_below="@+id/tvName"
         android:background="@drawable/border"
         android:backgroundTint="#F7E3F8">
@@ -30,10 +31,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:paddingLeft="10dp"
             android:text="Topic:  "
             android:textColor="@color/colorAccent"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="italic" />
 
         <TextView
             android:id="@+id/tv_topic"
@@ -72,12 +74,11 @@
         <TextView
             android:id="@+id/tv_word"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:text="name"
             android:textColor="@color/colorAccent"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="20sp" />
     </LinearLayout>
 
     <ImageView

@@ -81,10 +81,6 @@ public class DetailVocab extends AppCompatActivity {
             }
         });
 
-
-
-
-
     }
 
     class MyGesture extends  GestureDetector.SimpleOnGestureListener

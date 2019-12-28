@@ -93,8 +93,15 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     void getSpeakingTopics(){
-        topicArray.add("Nature");
+        topicArray.add("Student life");
         topicArray.add("Travel");
+        topicArray.add("Health");
+        topicArray.add("Lifestyles");
+        topicArray.add("Urbanisation");
+//        topicArray.add("The law");
+//        topicArray.add("The green revolution");
+//        topicArray.add("Keeping fit");
+//        topicArray.add("Through the ages");
     }
 
     private void showTopics(){
