@@ -315,17 +315,17 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
         Email = email.getText().toString().trim();
         Password = password.getText().toString().trim();
 
-        if (TextUtils.isEmpty(Name)){
-            Toast.makeText(Register.this, "Enter Name", Toast.LENGTH_SHORT).show();
-            return;
-        }else if (TextUtils.isEmpty(Email)){
+        if (TextUtils.isEmpty(Email)){
             Toast.makeText(Register.this, "Enter Email", Toast.LENGTH_SHORT).show();
             return;
         }else if (TextUtils.isEmpty(Password)){
             Toast.makeText(Register.this, "Enter Password", Toast.LENGTH_SHORT).show();
             return;
-        }else if (Password.length()<6){
-            Toast.makeText(Register.this,"Password must be greater then 6 digit",Toast.LENGTH_SHORT).show();
+        } else if (TextUtils.isEmpty(Name)){
+            Toast.makeText(Register.this, "Enter Name", Toast.LENGTH_SHORT).show();
+            return;
+        } else if (Password.length()<6){
+            Toast.makeText(Register.this,"Password must have at least 6 characters",Toast.LENGTH_SHORT).show();
             return;
         }
         instructorBox = (CheckBox) findViewById(R.id.checkBeginner);
