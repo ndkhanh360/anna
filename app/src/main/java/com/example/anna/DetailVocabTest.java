@@ -48,6 +48,7 @@ public class DetailVocabTest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_vocab_test);
 
+
         arrVocab = Topic_Vocab_Test.vocabTestArrayList;
 
 

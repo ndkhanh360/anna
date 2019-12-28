@@ -48,7 +48,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if (mUser != null) {
-                    Intent intent = new Intent(Login.this, DashboardActivity.class);
+                    Intent intent = new Intent(Login.this, StartLearn.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 }
@@ -159,7 +159,7 @@ public class Login extends AppCompatActivity {
         else {
             Email.getText().clear();
             Password.getText().clear();
-            Intent intent = new Intent(Login.this, DashboardActivity.class);
+            Intent intent = new Intent(Login.this, StartLearn.class);
 
             // Sending Email to Dashboard Activity using intent.
             intent.putExtra("Uid",users.getUid());
