@@ -223,29 +223,31 @@ public class FullscreenActivity extends AppCompatActivity {
         recordService = new Intent(this, Speech2TextService.class);
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("get_text_action");
-        registerReceiver(new ReceiverRecord(), intentFilter);
+        Log.i("OnCreate", "Video type: "+String.valueOf(videoType));
+        if (videoType == 1) {
+            registerReceiver(new ReceiverRecord(), intentFilter);
+            videoFrame.setVisibility(FrameLayout.GONE);
+        }
+        else {
+            ConnectorPkg.setApplicationUIContext(this);
+            ConnectorPkg.initialize();
+            Log.i("CONNECTOR STATE", "INITIALIZED");
+        }
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
         //findViewById(R.id.start_button).setOnTouchListener(mDelayHideTouchListener);
-
-        ConnectorPkg.setApplicationUIContext(this);
-        ConnectorPkg.initialize();
 //
 //
-        new CountDownTimer(2000, 500) {
-            public void onTick(long remain) {
-                Log.d("INFO", "onTick: ");
-            }
-            public void onFinish() {
-                GoStart();
-            }
-        }.start();
+    }
 
+    @Override
+    public void onDestroy() {
+//        unregisterReceiver(ReceiverRecord);
     }
 
     private void GetTopics() {
-        topics.add("What is your most favorite aspect about your school?");
+        topics.add("The World is bleeding. Save it by seeding.");
     }
 
     private void findViews() {
@@ -328,9 +330,9 @@ public class FullscreenActivity extends AppCompatActivity {
 //            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
 //                    Manifest.permission.CAMERA)) {
 //            } else {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.CAMERA},
-                        CODE_REQUEST_CAMERA);
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA},
+                    CODE_REQUEST_CAMERA);
         } else {
             // Permission has already been granted
         }
@@ -341,9 +343,9 @@ public class FullscreenActivity extends AppCompatActivity {
 //            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
 //                    Manifest.permission.RECORD_AUDIO)) {
 //            } else {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.RECORD_AUDIO},
-                        CODE_REQUEST_RECORD_AUDIO);
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.RECORD_AUDIO},
+                    CODE_REQUEST_RECORD_AUDIO);
 
         } else {
             // Permission has already been granted
@@ -364,6 +366,15 @@ public class FullscreenActivity extends AppCompatActivity {
         } else {
             // Permission has already been granted
         }
+        new CountDownTimer(2000, 500) {
+            public void onTick(long remain) {
+                Log.d("INFO", "onTick: ");
+            }
+            public void onFinish() {
+                GoStart();
+            }
+        }.start();
+
     }
 
     public void GoStart() {
@@ -429,7 +440,7 @@ public class FullscreenActivity extends AppCompatActivity {
                 }
             };
             vc.connect("prod.vidyo.io", vcToken, "DemoUser", "DemoRoom", cnn);
-
+            Log.i("VC CONNECT", "FUNCTION CALLED");
             LinearLayout ll = findViewById(R.id.ready_layout);
             ll.setVisibility(LinearLayout.GONE);
         }
@@ -456,7 +467,7 @@ public class FullscreenActivity extends AppCompatActivity {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Log.i("ERROR", "no response");
-              //      Log.i("ERROR",Log.getStackTraceString(error.getCause().getCause()));
+                    //      Log.i("ERROR",Log.getStackTraceString(error.getCause().getCause()));
 
                 }
             });
@@ -495,7 +506,7 @@ public class FullscreenActivity extends AppCompatActivity {
 
         List<String> comments = new ArrayList<String>();
         //open score activity
-        Intent inte = new Intent(this, ScoreBoardActivity.class);
+        Intent inte = new Intent(this,ScoreBoardActivity.class);
         inte.putExtra("videoType",videoType);
         inte.putExtra("Score",score);
 //        inte.putExtra("CommentCount",comments.size());
@@ -594,4 +605,5 @@ public class FullscreenActivity extends AppCompatActivity {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
+
 }

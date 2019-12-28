@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -61,18 +62,18 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
         email = (EditText)findViewById(R.id.editEmail);
         password = (EditText)findViewById(R.id.editPassword);
         mRegisterbtn = (Button)findViewById(R.id.buttonRegister);
+        instructorBox = (CheckBox) findViewById(R.id.checkBeginner);
         // for authentication using FirebaseAuth.
         mAuth = FirebaseAuth.getInstance();
         mRegisterbtn.setOnClickListener(this);
         mDialog = new ProgressDialog(this);
         mdatabase = FirebaseDatabase.getInstance().getReference().child("Users");
-
     }
 
     @Override
     public void onClick(View v) {
 //        if (v==mRegisterbtn){
-            UserRegister();
+        UserRegister();
 //        }else if (v== mLoginPageBack){
 //            startActivity(new Intent(Register.this,Login.class));
 //        }
@@ -97,7 +98,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
             Toast.makeText(Register.this, "Enter Password", Toast.LENGTH_SHORT).show();
             return;
         }else if (Password.length()<6){
-            Toast.makeText(Register.this,"Passwor must be greater then 6 digit",Toast.LENGTH_SHORT).show();
+            Toast.makeText(Register.this,"Password must be greater than 6 digit",Toast.LENGTH_SHORT).show();
             return;
         }
 //        instructorBox = (CheckBox) findViewById(R.id.isInstructor);
@@ -105,7 +106,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
         mDialog.setCanceledOnTouchOutside(false);
         mDialog.show();
         final boolean success=false;
-        mAuth.createUserWithEmailAndPassword(Email,Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        mAuth.createUserWithEmailAndPassword(Email,Password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
@@ -114,10 +115,13 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
                     mDialog.dismiss();
                     OnAuth(task.getResult().getUser());
                     mAuth.signOut();
-                    Toast.makeText(Register.this,"CHECK YOUR MAILBOX",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Register.this,"CREATE SUCCESS",Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(Register.this,Login.class));
                 }else{
+                    mDialog.dismiss();
                     Toast.makeText(Register.this,"error on creating user",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Register.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                    Log.i("NewUserError", " can't create user exception: " + task.getException());
                 }
             }
         });
@@ -131,9 +135,11 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
             user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()){
-                        Toast.makeText(Register.this,"Check your Email for verification",Toast.LENGTH_SHORT).show();
+                    if (task.isSuccessful()) {
+                        Toast.makeText(Register.this, "CHECK YOUR MAIL BOX", Toast.LENGTH_SHORT).show();
                         FirebaseAuth.getInstance().signOut();
+                    } else {
+                        Toast.makeText(Register.this, "Unable to send verification mail", Toast.LENGTH_SHORT).show();
                     }
                 }
             });

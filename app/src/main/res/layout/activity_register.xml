@@ -8,13 +8,14 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingTop="16dp"
-    tools:context=".Register">
+    tools:context="com.pav.anna.Register">
 
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/activity_register"
         android:gravity="center"
         android:text="User Sign Up"
         android:textColor="#000"

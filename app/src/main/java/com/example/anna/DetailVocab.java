@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class DetailVocab extends AppCompatActivity {
     private TextView tv_save, tv_topic, tv_content;
-    private  Button btnNext;
+    private  Button btnNext, btnFinish;
     ImageView imageView;
 
     ArrayList<Vocabulary> arrVocab = new ArrayList<>();
@@ -54,6 +54,7 @@ public class DetailVocab extends AppCompatActivity {
         ln = findViewById(R.id.ln_word);
         imageView = findViewById(R.id.image);
         btnNext = findViewById(R.id.btn_next);
+        btnFinish = findViewById(R.id.vocab_btn_finish);
 
         intent = getIntent();
         pos_current = intent.getIntExtra(Topic_Vocab.Pos,0);
@@ -81,6 +82,11 @@ public class DetailVocab extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void btn_onClick_VocabFinish(View view) {
+        Intent i = new Intent(DetailVocab.this, Topic_Vocab.class);
+        startActivity(i);
     }
 
     class MyGesture extends  GestureDetector.SimpleOnGestureListener
@@ -154,20 +160,23 @@ public class DetailVocab extends AppCompatActivity {
         if (pos_current > end) {
             pos_current = end;
 
-            btnNext.setText("Finish");
-            btnNext.setTextColor(Color.parseColor("#ffffff"));
-            btnNext.setBackgroundResource(R.drawable.border);
-            btnNext.setBackgroundColor(Color.parseColor("#006fff"));
-
-            btnNext.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent i = new Intent(DetailVocab.this, Topic_Vocab.class);
-                    startActivity(i);
-                }
-            });
+            btnFinish.setVisibility(View.VISIBLE);
+//
+//            btnNext.setText("Finish");
+//            btnNext.setTextColor(Color.parseColor("#ffffff"));
+//            btnNext.setBackgroundResource(R.drawable.border);
+//            btnNext.setBackgroundColor(Color.parseColor("#006fff"));
+//
+//            btnNext.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent i = new Intent(DetailVocab.this, Topic_Vocab.class);
+//                    startActivity(i);
+//                }
+//            });
         }
         else {
+//            btnFinish.setVisibility(View.INVISIBLE);
             while (arrVocab.get(pos_current).getTopic().compareTo(topic) != 0 && pos_current <= end) {
                 pos_current++;
             }
@@ -195,20 +204,23 @@ public class DetailVocab extends AppCompatActivity {
 
         pos_current++;
         if (pos_current > end) {
+//            pos_current = end;
+//
+//            btnNext.setText("Finish");
+//            btnNext.setTextColor(Color.parseColor("#ffffff"));
+//            btnNext.setBackgroundResource(R.drawable.border);
+//            btnNext.setBackgroundColor(Color.parseColor("#006fff"));
+//
+//            btnNext.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent i = new Intent(DetailVocab.this, Topic_Vocab.class);
+//                    startActivity(i);
+//                }
+//            });
             pos_current = end;
 
-            btnNext.setText("Finish");
-            btnNext.setTextColor(Color.parseColor("#ffffff"));
-            btnNext.setBackgroundResource(R.drawable.border);
-            btnNext.setBackgroundColor(Color.parseColor("#006fff"));
-
-            btnNext.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent i = new Intent(DetailVocab.this, Topic_Vocab.class);
-                    startActivity(i);
-                }
-            });
+            btnFinish.setVisibility(View.VISIBLE);
         }
         else {
             while (arrVocab.get(pos_current).getTopic().compareTo(topic) != 0 && pos_current <= end) {
