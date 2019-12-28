@@ -35,7 +35,7 @@
             android:text="Topic:  "
             android:textColor="@color/colorAccent"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="italic" />
 
         <TextView
             android:id="@+id/tv_topic_test"
@@ -66,25 +66,28 @@
         android:gravity="center_horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Question"
             android:textSize="20sp"
+            android:layout_marginHorizontal="20dp"
+            android:gravity="left"
             android:id="@+id/tvQuestion"/>
 
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/editAnswer"
-            android:hint="Enter your answer"
+            android:layout_marginHorizontal="20dp"
+            android:hint="Fill in the blank..."
             android:layout_marginTop="30sp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:id="@+id/tvResult"
-            android:hint="Result: "/>
+            android:textSize="14sp"
+            android:textStyle="italic"
+            android:id="@+id/tvResult" />
 
         <LinearLayout
             android:layout_width="wrap_content"

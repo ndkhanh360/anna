@@ -7,7 +7,7 @@
 
     <string name="sharedPref">tokenServer</string>
 
-    <string name="ready_string">Click button below to start</string>
+    <string name="ready_string">Click below button to start recording...</string>
     <string-array name="sex_array">
         <item>Male</item>
         <item>Female</item>

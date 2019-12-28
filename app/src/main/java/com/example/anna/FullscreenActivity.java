@@ -245,7 +245,7 @@ public class FullscreenActivity extends AppCompatActivity {
     }
 
     private void GetTopics() {
-        topics.add("The World is bleeding. Save it by seeding.");
+        topics.add("What is your most favorite aspect about your school?");
     }
 
     private void findViews() {
@@ -495,7 +495,7 @@ public class FullscreenActivity extends AppCompatActivity {
 
         List<String> comments = new ArrayList<String>();
         //open score activity
-        Intent inte = new Intent(this,ScoreBoardActivity.class);
+        Intent inte = new Intent(this, ScoreBoardActivity.class);
         inte.putExtra("videoType",videoType);
         inte.putExtra("Score",score);
 //        inte.putExtra("CommentCount",comments.size());

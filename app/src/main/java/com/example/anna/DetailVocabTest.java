@@ -89,7 +89,6 @@ public class DetailVocabTest extends AppCompatActivity {
             public void onClick(View v) {
                 tv_result.setText("Right: " + String.valueOf(count_right) + "\n" + "Wrong: "+ String.valueOf(count_wrong));
 
-
             }
         });
 
@@ -110,7 +109,7 @@ public class DetailVocabTest extends AppCompatActivity {
                 if (pos_current > end)
                 {
                     pos_current = end;
-                    Toast.makeText(DetailVocabTest.this, "The last question", Toast.LENGTH_LONG).show();
+                    Toast.makeText(DetailVocabTest.this, "This is the last question", Toast.LENGTH_LONG).show();
                 }
                 else {
                     while (arrVocab.get(pos_current).getTopic().compareTo(topic) != 0 && pos_current <= end) {
@@ -146,11 +145,13 @@ public class DetailVocabTest extends AppCompatActivity {
         if (yourAns.compareTo(s) == 0)
         {
             count_right++;
-            tv_result.setText("You're right");
+            tv_result.setText("Correct!");
+            tv_result.setTextColor(Color.parseColor("#3e8515"));
         }
         else {
             count_wrong++;
-            tv_result.setText("You' re wrong!!!, fighting");
+            tv_result.setText("Incorrect, try again!");
+            tv_result.setTextColor(Color.RED);
         }
     }
 
