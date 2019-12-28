@@ -231,9 +231,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.SetOptions;
 import com.example.anna.R;
+import com.google.firestore.v1.WriteResult;
 
 import java.util.Date;
-
+import java.util.HashMap;
+import java.util.Map;
 public class Register extends AppCompatActivity implements View.OnClickListener{
     EditText name,email,password;
     Button mRegisterbtn;
@@ -246,6 +248,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
     String Uid="";
     CheckBox instructorBox;
 
+    FirebaseFirestore db;
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -256,6 +259,28 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        db = FirebaseFirestore.getInstance();
+//        Map<String, Object> user = new HashMap<>();
+//        user.put("first", "Alan");
+//        user.put("middle", "Mathison");
+//        user.put("last", "Turing");
+//        user.put("born", 1912);
+//
+//// Add a new document with a generated ID
+//        db.collection("Users")
+//                .add(user)
+//                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+//                    @Override
+//                    public void onSuccess(DocumentReference documentReference) {
+//                        Log.d("test", "DocumentSnapshot added with ID: " + documentReference.getId());
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Log.d("test", "Error adding document");
+//                    }
+//                });
         super.onCreate(savedInstanceState);
         //clgt("abcs");
         setContentView(R.layout.activity_register);
@@ -316,10 +341,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
                     sendEmailVerification();
                     //clgt(mAuth.getUid());
                     mDialog.dismiss();
-                    //OnAuth(task.getResult().getUser());
-                    mAuth.signOut();
-                    Toast.makeText(Register.this,"CHECK YOUR MAILBOX",Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(Register.this,Login.class));
+                    //mAuth.signOut();
                 }else{
                     Toast.makeText(Register.this,"error on creating user",Toast.LENGTH_SHORT).show();
                 }
@@ -335,17 +357,38 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
             user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()){
-                        Toast.makeText(Register.this,"Check your Email for verification",Toast.LENGTH_SHORT).show();
-                        FirebaseAuth.getInstance().signOut();
+                    if (task.isSuccessful()) {
+                        OnAuth();
+                    } else {
+                        Toast.makeText(Register.this, "Unable to send verification mail", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
         }
     }
 
-    private void OnAuth(FirebaseUser user) {
-        createAnewUser(user.getUid());
+    private void OnAuth() {
+        Map<String, Object> docData = new HashMap<>();
+        docData.put("name", getDisplayName());
+        docData.put("type", instructorBox.isChecked());
+        docData.put("time", "1");
+        docData.put("email", getUserEmail());
+        db.collection("Users")
+                .add(docData)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        mAuth.signOut();
+                        Toast.makeText(Register.this,"Check your Email for verification",Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(Register.this,Login.class));
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("fail", "Error adding document");
+                    }
+                });
     }
 
     private void createAnewUser(String uid) {
@@ -357,7 +400,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
     }
 
 
-    private com.example.anna.User BuildNewuser(){
+    private User BuildNewuser(){
         long type = 0;
         if (instructorBox.isChecked())
             type = 1;
