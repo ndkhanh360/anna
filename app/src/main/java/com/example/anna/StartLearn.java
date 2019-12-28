@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -27,6 +28,16 @@ public class StartLearn extends AppCompatActivity {
         avatar= findViewById(R.id.imAvatar);
         tvTitle=findViewById(R.id.tvTitle);
 
+        Intent intent = getIntent();
+        int  show_profile = intent.getIntExtra("show_profile", 1);
+
+        if (show_profile == 1) {
+            Log.i("Extra", "1");
+            ImageView iv = findViewById(R.id.imAvatar);
+            TextView tv = findViewById(R.id.tvProfile);
+            iv.setVisibility(View.VISIBLE);
+            tv.setVisibility(View.VISIBLE);
+        }
         //avatar.setImageResource(getAvatarFromUser());
 
         tvTitle.setText("Learn & Practice");

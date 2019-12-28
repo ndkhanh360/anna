@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, StartLearn.class );
+                intent.putExtra("show_profile", 0);
                 startActivity(intent);
             }
         });
