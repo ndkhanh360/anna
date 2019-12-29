@@ -9,13 +9,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class StartLearn extends AppCompatActivity {
 
     Button btnVocab, btnSpeaking, btnPronun;
     ImageView avatar;
     TextView tvTitle;
-
+    private String eMail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,12 +31,18 @@ public class StartLearn extends AppCompatActivity {
 
         Intent intent = getIntent();
         int  show_profile = intent.getIntExtra("show_profile", 1);
-
+        eMail = intent.getStringExtra("Email");
         if (show_profile == 1) {
             Log.i("Extra", "1");
             ImageView iv = findViewById(R.id.imAvatar);
             TextView tv = findViewById(R.id.tvProfile);
             iv.setVisibility(View.VISIBLE);
+            iv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    btn_onClick_Profile(v);
+                }
+            });
             tv.setVisibility(View.VISIBLE);
         }
         //avatar.setImageResource(getAvatarFromUser());
@@ -68,10 +75,14 @@ public class StartLearn extends AppCompatActivity {
 
     }
 
-    public void btn_onClick_Speaking(View view)
+    public void btn_onClick_Profile(View view)
     {
-        Intent i = new Intent(StartLearn.this, DashboardActivity.class);
-        i.putExtra("Uid","123");
+        if ( eMail.isEmpty()){
+            Toast.makeText(StartLearn.this, "You haven't login", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Intent i = new Intent(StartLearn.this, ProfileActivity.class);
+        i.putExtra("Email",eMail);
         startActivity(i);
     }
 

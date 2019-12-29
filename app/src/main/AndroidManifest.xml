@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-
+        <activity android:name=".ProfileActivity"/>
         <activity android:name=".StartPronun" />
         <activity android:name=".YouGlish" />
         <activity android:name=".Topic_Vocab_Test" />

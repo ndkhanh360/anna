@@ -27,6 +27,7 @@ public class Login extends AppCompatActivity {
     FirebaseAuth.AuthStateListener mAuthListner;
     FirebaseUser mUser;
     String email, password;
+    private String eMail;
     ProgressDialog dialog;
     User user=null;
     public static final String userEmail="";
@@ -157,10 +158,11 @@ public class Login extends AppCompatActivity {
             finish();
         }
         else {
+            eMail = Email.getText().toString();
             Email.getText().clear();
             Password.getText().clear();
             Intent intent = new Intent(Login.this, StartLearn.class);
-
+            intent.putExtra("Email",eMail);
             // Sending Email to Dashboard Activity using intent.
             intent.putExtra("Uid",users.getUid());
             startActivity(intent);
