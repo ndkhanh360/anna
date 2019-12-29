@@ -116,7 +116,7 @@
                 android:backgroundTint="#006fff"
                 android:textColor="#ffffff"
                 android:textStyle="bold"
-                android:text="finish"
+                android:text="cancel"
                 android:onClick="btn_onClick_Finish"/>
         </LinearLayout>
 
