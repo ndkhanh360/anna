@@ -115,13 +115,13 @@ public class Login extends AppCompatActivity {
         email = Email.getText().toString().trim();
         password = Password.getText().toString().trim();
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(Login.this, "Enter the correct Email", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Login.this, "Enter email", Toast.LENGTH_SHORT).show();
             return;
         } else if (TextUtils.isEmpty(password)) {
-            Toast.makeText(Login.this, "Enter the correct password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Login.this, "Enter password", Toast.LENGTH_SHORT).show();
             return;
         }
-        dialog.setMessage("Loging in please wait...");
+        dialog.setMessage("Please wait...");
         dialog.setIndeterminate(true);
         dialog.show();
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -130,7 +130,7 @@ public class Login extends AppCompatActivity {
                 if (!task.isSuccessful()) {
                     dialog.dismiss();
 
-                    Toast.makeText(Login.this, "Login not successfull", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, "Login failed!", Toast.LENGTH_SHORT).show();
 
                 } else {
                     dialog.dismiss();
@@ -152,7 +152,7 @@ public class Login extends AppCompatActivity {
         FirebaseUser users=FirebaseAuth.getInstance().getCurrentUser();
         boolean emailVerified=users.isEmailVerified();
         if(!emailVerified){
-            Toast.makeText(this,"Verify the Email Id",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Please verify your account!",Toast.LENGTH_SHORT).show();
             mAuth.signOut();
             finish();
         }

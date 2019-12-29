@@ -329,7 +329,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
             return;
         }
         instructorBox = (CheckBox) findViewById(R.id.checkBeginner);
-        mDialog.setMessage("Creating User please wait...");
+        mDialog.setMessage("Please wait...");
         mDialog.setCanceledOnTouchOutside(false);
         mDialog.show();
         final boolean success=false;
@@ -343,7 +343,9 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
                     mDialog.dismiss();
                     //mAuth.signOut();
                 }else{
-                    Toast.makeText(Register.this,"error on creating user",Toast.LENGTH_SHORT).show();
+                    mDialog.dismiss();
+
+                    Toast.makeText(Register.this,"Failed to sign up!",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -379,7 +381,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         mAuth.signOut();
-                        Toast.makeText(Register.this,"Check your Email for verification",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Register.this,"Check your email for verification",Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(Register.this,Login.class));
                     }
                 })
