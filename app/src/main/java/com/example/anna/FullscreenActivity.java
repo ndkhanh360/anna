@@ -512,6 +512,7 @@ public class FullscreenActivity extends AppCompatActivity {
         Intent inte = new Intent(this,ScoreBoardActivity.class);
         inte.putExtra("videoType",videoType);
         inte.putExtra("Score",score);
+        inte.putExtra("Email",eMail);
 //        inte.putExtra("CommentCount",comments.size());
 //        for (int i = 0; i < comments.size(); i++){
 //            inte.putExtra("Comment_"+String.valueOf(i),comments.get(i));

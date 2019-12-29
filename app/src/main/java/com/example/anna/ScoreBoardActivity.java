@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -38,13 +39,14 @@ public class ScoreBoardActivity extends AppCompatActivity {
     private ArrayList<String> comments;
     private ListView listView;
     private TextView textView;
-
+    ProgressDialog progressDialog;
     private EditText editComment;
     private EditText editScore;
     private int videoType;
     private FirebaseFirestore db;
     private String cId;
     private ArrayList<String> ids;
+    private String eMail;
     @Override
     public void onBackPressed() {
         ids = new ArrayList<>();
@@ -78,7 +80,7 @@ public class ScoreBoardActivity extends AppCompatActivity {
     public void OnSendComment(@Nullable View v){
         //asynchronously update doc, create the document if missing
         Map<String, Object> update = new HashMap<>();
-        update.put("from", "votrngan@gmail.com");
+        update.put("from", eMail);
         update.put("to", "minhthuy99clber@gmail.com");
         update.put("cId", cId);
         update.put("comment", editComment.getText());
@@ -111,6 +113,7 @@ public class ScoreBoardActivity extends AppCompatActivity {
         Intent intent=getIntent();
         comments = new ArrayList<String>();
         videoType = intent.getIntExtra("videoType",1);
+        eMail = intent.getStringExtra("Email");
         if (videoType == 2) {
             setContentView(R.layout.activity_speaking_comment);
             editComment = (EditText) findViewById(R.id.editComment);
@@ -140,30 +143,46 @@ public class ScoreBoardActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://devcchotot.herokuapp.com/user/getScore";
         score = (new Random()).nextInt(3) + 4;
+        if (videoType == 1)
+            return;
+
         score = -1;
-        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Waiting for your partner ... ");
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
-        while (score == -1) {
-            db = FirebaseFirestore.getInstance();
-            db.collection("Speakings").get()
-                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isSuccessful()) {
-                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                    if (document.getId().compareTo(cId) == 0)
-                                        continue;
-                                    score = Integer.parseInt(document.getData().get("score").toString());
+
+        new CountDownTimer(2000, 200) {
+            public void onTick(long remain) {
+                db = FirebaseFirestore.getInstance();
+                db.collection("Speakings").get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        if (document.getId().compareTo(cId) == 0)
+                                            continue;
+                                        score = Integer.parseInt(document.getData().get("score").toString());
+                                        progressDialog.dismiss();
+                                        getComments();
+                                    }
+                                } else {
+                                    Log.i("abc", "Error getting documents.", task.getException());
                                 }
-                            } else {
-                                Log.i("abc", "Error getting documents.", task.getException());
                             }
-                        }
-                    });
-        }
-        progressDialog.dismiss();
+                        });
+
+            }
+            public void onFinish() {
+                if (score == -1){
+                    videoType = 1;
+                    getComments();
+                }
+                progressDialog.dismiss();
+            }
+        }.start();
+
         return;
 // Request a string response from the provided URL.
 //        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -188,13 +207,12 @@ public class ScoreBoardActivity extends AppCompatActivity {
     private void getComments(){
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://devcchotot.herokuapp.com/user/getComment";
-//        if (videoType == 1) {
-//            comments.add("Need more complex words");
-//            comments.add("Use some idoms or phrase of verbs");
-//            comments.add("Be careful with your grammar");
-//        }else{
-//            comments.add("Need more complex words");
-//        }
+        if (videoType == 1) {
+            comments.add("Need more complex words");
+            comments.add("Use some idoms or phrase of verbs");
+            comments.add("Be careful with your grammar");
+            return;
+        }
 
         db = FirebaseFirestore.getInstance();
         db.collection("Speakings").get()

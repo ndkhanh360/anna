@@ -35,6 +35,7 @@ public class DashboardActivity extends AppCompatActivity {
     ArrayList<String> topicArray;
     private final ArrayList<Integer> choosedTopic = new ArrayList<Integer>();
     private ListView listView;
+    String eMail;
 
     void getData(String uid)
     {
@@ -66,6 +67,7 @@ public class DashboardActivity extends AppCompatActivity {
         // Sending Email to Dashboard Activity using intent.
         intent.putExtra("videoType",1);
         intent.putExtra("topic",topicArray.get(choosedTopic.get(0)));
+        intent.putExtra("Email",eMail);
         startActivity(intent);
     }
 
@@ -78,6 +80,7 @@ public class DashboardActivity extends AppCompatActivity {
         // Sending Email to Dashboard Activity using intent.
         intent.putExtra("videoType",2);
         intent.putExtra("topic",topicArray.get(choosedTopic.get(0)));
+        intent.putExtra("Email",eMail);
         startActivity(intent);
     }
 
@@ -89,6 +92,7 @@ public class DashboardActivity extends AppCompatActivity {
         // Sending Email to Dashboard Activity using intent.
         intent.putExtra("videoType",3);
         intent.putExtra("userType",user.type);
+        intent.putExtra("Email",eMail);
         startActivity(intent);
     }
 
@@ -145,6 +149,7 @@ protected void onCreate(Bundle savedInstanceState) {
         Log.i("Dashboard"," get intent: ");
         // Receiving User Email Send By MainActivity.
         String Uid=intent.getStringExtra("Uid");
+        eMail = intent.getStringExtra("Email");
         Log.i("Dashboard","Uid: "+ Uid);
 //        getData(Uid);
         // Setting up received email to TextView.

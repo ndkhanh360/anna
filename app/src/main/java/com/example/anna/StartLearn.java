@@ -80,7 +80,8 @@ public class StartLearn extends AppCompatActivity {
 
         Intent intent = getIntent();
         int  show_profile = intent.getIntExtra("show_profile", 1);
-        eMail = intent.getStringExtra("Email");
+        if (show_profile != 0)
+            eMail = intent.getStringExtra("Email");
         if (show_profile == 1) {
             Log.i("Extra", "1");
             ImageView iv = findViewById(R.id.imAvatar);
