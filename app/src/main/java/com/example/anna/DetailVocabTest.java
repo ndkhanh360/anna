@@ -88,7 +88,7 @@ public class DetailVocabTest extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tv_result.setText("Right: " + String.valueOf(count_right) + "\n" + "Wrong: "+ String.valueOf(count_wrong));
+                tv_result.setText("Right: " + String.valueOf(count_right) + " - " + "Wrong: "+ String.valueOf(count_wrong));
 
             }
         });
@@ -110,7 +110,9 @@ public class DetailVocabTest extends AppCompatActivity {
                 if (pos_current > end)
                 {
                     pos_current = end;
-                    Toast.makeText(DetailVocabTest.this, "This is the last question", Toast.LENGTH_LONG).show();
+                    Button btnFinish = findViewById(R.id.btn_finish);
+                    btnFinish.setVisibility(View.VISIBLE);
+//                    Toast.makeText(DetailVocabTest.this, "This is the last question", Toast.LENGTH_LONG).show();
                 }
                 else {
                     while (arrVocab.get(pos_current).getTopic().compareTo(topic) != 0 && pos_current <= end) {
