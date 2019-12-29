@@ -1,9 +1,14 @@
 package com.example.anna;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +22,50 @@ public class StartLearn extends AppCompatActivity {
     ImageView avatar;
     TextView tvTitle;
     private String eMail;
+    private static final int CODE_REQUEST_CAMERA = 2810;
+    private static final int CODE_REQUEST_RECORD_AUDIO = 2811;
+    private static final int CODE_REQUEST_READ_PHONE_STATE = 2812;
+
+
+    private void checkAndRequestPermissions() {
+        // check and grant permission
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA},
+                    CODE_REQUEST_CAMERA);
+        } else {
+            // Permission has already been granted
+        }
+        // check and grant permission
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.RECORD_AUDIO)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.RECORD_AUDIO},
+                    CODE_REQUEST_RECORD_AUDIO);
+
+        } else {
+            // Permission has already been granted
+        }
+
+
+        // check and grant permission
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_PHONE_STATE)
+                != PackageManager.PERMISSION_GRANTED) {
+//            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+//                    Manifest.permission.RECORD_AUDIO)) {
+//            } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_PHONE_STATE},
+                    CODE_REQUEST_READ_PHONE_STATE);
+
+        } else {
+            // Permission has already been granted
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +116,7 @@ public class StartLearn extends AppCompatActivity {
         btnSpeaking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                checkAndRequestPermissions();
                 Intent i = new Intent(StartLearn.this, DashboardActivity.class);
                 i.putExtra("Uid","123");
                 startActivity(i);
