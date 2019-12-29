@@ -90,6 +90,7 @@ public class FullscreenActivity extends AppCompatActivity {
     private List<String> topics;
     SharedPreferences.Editor sfEditor;
     private long userType;
+    private String eMail;
     /**
      * Some older devices needs a small delay between UI widget updates
      * and a change of the status and navigation bar.
@@ -199,6 +200,7 @@ public class FullscreenActivity extends AppCompatActivity {
         Intent intent = getIntent();
         userType = intent.getIntExtra("userType",0);
         videoType = intent.getIntExtra("videoType",1);
+        eMail = intent.getStringExtra("Email");
         String topic = intent.getStringExtra("topic");
         if (videoType == 0)
             return;
@@ -271,7 +273,7 @@ public class FullscreenActivity extends AppCompatActivity {
         }
         Log.i("INFO","userName: "+userName);
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://devcchotot.herokuapp.com/" + userName;
+        String url = "http://devcchotot.herokuapp.com/" + eMail;
 
 // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,

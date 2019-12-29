@@ -50,6 +50,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
     CheckBox instructorBox;
     Spinner sexSpinner;
     EditText ageEdit;
+    EditText describeEdit;
     FirebaseFirestore db;
     @Override
     protected void onDestroy() {
@@ -92,6 +93,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
         mRegisterbtn = (Button)findViewById(R.id.buttonRegister);
         sexSpinner = (Spinner) findViewById(R.id.sexSpinner);
         ageEdit = (EditText)findViewById(R.id.editAge);
+        describeEdit = (EditText)findViewById(R.id.editDescription);
         //instructorBox = (CheckBox)findViewById(R.id.checkBeginner);
         // for authentication using FirebaseAuth.
         mAuth = FirebaseAuth.getInstance();
@@ -180,8 +182,9 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
         Log.i("INFO","OnAuth called");
         Map<String, Object> docData = new HashMap<>();
         docData.put("name", getDisplayName());
-        docData.put("sex", sexSpinner.getPrompt());
+        docData.put("sex", sexSpinner.getSelectedItemPosition());
         docData.put("age", Integer.parseInt(ageEdit.getText().toString()));
+        docData.put("description", describeEdit.getText().toString());
         docData.put("email", getUserEmail());;
         docData.put("type", instructorBox.isChecked());
         docData.put("time", "1");

@@ -118,6 +118,7 @@ public class StartLearn extends AppCompatActivity {
             public void onClick(View v) {
                 checkAndRequestPermissions();
                 Intent i = new Intent(StartLearn.this, DashboardActivity.class);
+                i.putExtra("Email",eMail);
                 i.putExtra("Uid","123");
                 startActivity(i);
             }

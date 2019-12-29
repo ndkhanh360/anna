@@ -131,4 +131,14 @@
         android:onClick="OnUpdateProfileClicked"
         android:text="UPDATE PROFILE" />
 
+
+    <Button
+        android:id="@+id/buttonDeleteAcc"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonUpdateProfile"
+        android:layout_marginTop="16dp"
+        android:onClick="OnDelAcc"
+        android:text="DELETE MY ACCOUNT/PROFILE" />
+
 </RelativeLayout>
