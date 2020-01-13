@@ -101,13 +101,14 @@ public class ScoreBoardActivity extends AppCompatActivity {
     }
 
     public void OnSendComment(@Nullable View v){
+        if (eMail == null || eMail.isEmpty()){
+            Toast.makeText(this, "You must log in to do this", Toast.LENGTH_SHORT).show();
+            onBackPressed();
+        }
         //asynchronously update doc, create the document if missing
         if (editScore.getText().toString().isEmpty()){
             Toast.makeText(this, "SCORE YOUR PARTNER", Toast.LENGTH_SHORT).show();
             return;
-        }
-        if (eMail == null || eMail.isEmpty()){
-            Toast.makeText(this, "You must log in to view comment", Toast.LENGTH_SHORT).show();
         }
         Map<String, Object> update = new HashMap<>();
         update.put("from", eMail);
