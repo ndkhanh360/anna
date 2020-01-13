@@ -22,6 +22,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -37,6 +43,17 @@ import java.util.Random;
 
 public class ScoreBoardActivity extends AppCompatActivity {
 
+    public class Comment{
+        public String eFrom;
+        public String eTo;
+        public int Score;
+        public String Comment;
+
+        public Comment() {
+            // Default constructor required for calls to DataSnapshot.getValue(Post.class)
+        }
+    }
+
     private int score;
     private ArrayList<String> comments;
     private ListView listView;
@@ -49,6 +66,10 @@ public class ScoreBoardActivity extends AppCompatActivity {
     private String cId;
     private ArrayList<String> ids;
     private String eMail;
+    private DatabaseReference mDatabase;
+    private DatabaseReference mCommentRef;
+    private String myScore;
+    private String myComment;
     @Override
     public void onBackPressed() {
         ids = new ArrayList<>();
@@ -85,24 +106,28 @@ public class ScoreBoardActivity extends AppCompatActivity {
             Toast.makeText(this, "SCORE YOUR PARTNER", Toast.LENGTH_SHORT).show();
             return;
         }
+        if (eMail == null || eMail.isEmpty()){
+            Toast.makeText(this, "You must log in to view comment", Toast.LENGTH_SHORT).show();
+        }
         Map<String, Object> update = new HashMap<>();
         update.put("from", eMail);
         update.put("to", "minhthuy99clber@gmail.com");
         update.put("cId", cId);
         update.put("comment", editComment.getText().toString());
         update.put("score", Integer.parseInt(editScore.getText().toString()));
-
         db = FirebaseFirestore.getInstance();
         db.collection("Speakings").add(update).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
-                Log.i("DB INFO", "DocumentSnapshot added with ID: " + documentReference.getId());
                 cId = documentReference.getId();
+                Log.i("DB INFO", "DocumentSnapshot added with ID: " + documentReference.getId());
+                Log.d("DB INFO", "DocumentSnapshot added with ID: " + documentReference.getId());
             }
         }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.w("DB ERROR", "Error adding document", e);
+                        Log.d("DB ERROR", "Error adding document");
                     }
                 }).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
             @Override
@@ -127,6 +152,8 @@ public class ScoreBoardActivity extends AppCompatActivity {
         Intent intent=getIntent();
         comments = new ArrayList<String>();
         videoType = intent.getIntExtra("videoType",1);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mCommentRef = mDatabase.getRef().child("Speakings");
         SharedPreferences sp = getSharedPreferences("Login", MODE_PRIVATE);
         eMail = sp.getString("Email", null);
         if (videoType == 2) {
