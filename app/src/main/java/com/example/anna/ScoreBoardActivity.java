@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
@@ -79,26 +81,38 @@ public class ScoreBoardActivity extends AppCompatActivity {
 
     public void OnSendComment(@Nullable View v){
         //asynchronously update doc, create the document if missing
+        if (editScore.getText().toString().isEmpty()){
+            Toast.makeText(this, "SCORE YOUR PARTNER", Toast.LENGTH_SHORT).show();
+            return;
+        }
         Map<String, Object> update = new HashMap<>();
         update.put("from", eMail);
         update.put("to", "minhthuy99clber@gmail.com");
         update.put("cId", cId);
-        update.put("comment", editComment.getText());
+        update.put("comment", editComment.getText().toString());
         update.put("score", Integer.parseInt(editScore.getText().toString()));
 
-        db.collection("cities").add(update).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        db = FirebaseFirestore.getInstance();
+        db.collection("Speakings").add(update).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 Log.i("DB INFO", "DocumentSnapshot added with ID: " + documentReference.getId());
                 cId = documentReference.getId();
             }
-        })
-                .addOnFailureListener(new OnFailureListener() {
+        }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.w("DB ERROR", "Error adding document", e);
                     }
-                });
+                }).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentReference> task) {
+                if (task.isSuccessful())
+                {
+
+                }
+            }
+        });
 
         setContentView(R.layout.activity_score_board);
         textView = findViewById(R.id.scoreview);
@@ -113,7 +127,8 @@ public class ScoreBoardActivity extends AppCompatActivity {
         Intent intent=getIntent();
         comments = new ArrayList<String>();
         videoType = intent.getIntExtra("videoType",1);
-        eMail = intent.getStringExtra("Email");
+        SharedPreferences sp = getSharedPreferences("Login", MODE_PRIVATE);
+        eMail = sp.getString("Email", null);
         if (videoType == 2) {
             setContentView(R.layout.activity_speaking_comment);
             editComment = (EditText) findViewById(R.id.editComment);
@@ -152,7 +167,7 @@ public class ScoreBoardActivity extends AppCompatActivity {
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
 
-        new CountDownTimer(2000, 200) {
+        new CountDownTimer(281020, 500) {
             public void onTick(long remain) {
                 db = FirebaseFirestore.getInstance();
                 db.collection("Speakings").get()
@@ -161,9 +176,21 @@ public class ScoreBoardActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if (task.isSuccessful()) {
                                     for (QueryDocumentSnapshot document : task.getResult()) {
+                                        if (document == null)
+                                            return;
+                                        if (document.getId() == null)
+                                            return;
                                         if (document.getId().compareTo(cId) == 0)
                                             continue;
+                                        if (document.getData() == null)
+                                            return;
+                                        if (document.getData().get("score") == null)
+                                            return;
+                                        Log.i("CID", "cId: " + cId.valueOf(score));
+                                        Log.d("CID", "cId: " + cId.valueOf(score));
                                         score = Integer.parseInt(document.getData().get("score").toString());
+                                        Log.i("SCORE", "Score: " + String.valueOf(score));
+                                        Log.d("SCORE", "Score: " + String.valueOf(score));
                                         progressDialog.dismiss();
                                         getComments();
                                     }

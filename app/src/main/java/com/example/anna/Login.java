@@ -2,6 +2,7 @@ package com.example.anna;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -159,6 +160,12 @@ public class Login extends AppCompatActivity {
         }
         else {
             eMail = Email.getText().toString();
+            SharedPreferences sp=getSharedPreferences("Login", MODE_PRIVATE);
+            SharedPreferences.Editor Ed=sp.edit();
+            Ed.putString("Uid",users.getUid());
+            Ed.putString("Email",eMail);
+            Ed.putString("Password",Password.getText().toString());
+            Ed.commit();
             Email.getText().clear();
             Password.getText().clear();
             Intent intent = new Intent(Login.this, StartLearn.class);
