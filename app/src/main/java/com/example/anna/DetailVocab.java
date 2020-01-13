@@ -24,6 +24,7 @@ public class DetailVocab extends AppCompatActivity {
     ArrayList<Vocabulary> arrVocab = new ArrayList<>();
 
     Vocabulary vocab;
+    String topic_current;
 
     public static final String Topic = "t";
     public static final String Word = "w";
@@ -59,18 +60,23 @@ public class DetailVocab extends AppCompatActivity {
         intent = getIntent();
         pos_current = intent.getIntExtra(Topic_Vocab.Pos,0);
 
+        topic_current = Topic_Vocab.topicArrayList.get(pos_current);
 
         for (int i = 0;i <arrVocab.size(); i++)
         {
-            if (arrVocab.get(i).getTopic() == Topic_Vocab.topicArrayList.get(pos_current))
+            if (arrVocab.get(i).getTopic().compareTo(topic_current) == 0)
             {
                 pos_current = i;
                 break;
             }
         }
+       // topic_current = arrVocab.get(pos_current).getTopic();
+       // Log.i("!!!", String.valueOf(pos_current));
         showDetail(pos_current, index);
         start = pos_current;
-        end = getEnd(Topic_Vocab.topicArrayList.get(pos_current), arrVocab);
+        end = getEnd(topic_current, arrVocab);
+
+      //  Log.i("!!!!!", String.valueOf(getEnd(topic_current, arrVocab)));
 
         gestureDetector = new GestureDetector(this, new MyGesture());
 
@@ -154,30 +160,18 @@ public class DetailVocab extends AppCompatActivity {
     }
 
     public void btn_onClick_Next(View view) {
-        String topic = tv_topic.getText().toString();
+       // String topic = tv_topic.getText().toString();
 
         pos_current++;
-        if (pos_current > end) {
+        if (pos_current >= end) {
             pos_current = end;
 
             btnFinish.setVisibility(View.VISIBLE);
-//
-//            btnNext.setText("Finish");
-//            btnNext.setTextColor(Color.parseColor("#ffffff"));
-//            btnNext.setBackgroundResource(R.drawable.border);
-//            btnNext.setBackgroundColor(Color.parseColor("#006fff"));
-//
-//            btnNext.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Intent i = new Intent(DetailVocab.this, Topic_Vocab.class);
-//                    startActivity(i);
-//                }
-//            });
+
         }
         else {
 //            btnFinish.setVisibility(View.INVISIBLE);
-            while (arrVocab.get(pos_current).getTopic().compareTo(topic) != 0 && pos_current <= end) {
+            while (arrVocab.get(pos_current).getTopic().compareTo(topic_current) != 0 && pos_current <= end) {
                 pos_current++;
             }
         }
@@ -203,21 +197,8 @@ public class DetailVocab extends AppCompatActivity {
         String topic = tv_topic.getText().toString();
 
         pos_current++;
-        if (pos_current > end) {
-//            pos_current = end;
-//
-//            btnNext.setText("Finish");
-//            btnNext.setTextColor(Color.parseColor("#ffffff"));
-//            btnNext.setBackgroundResource(R.drawable.border);
-//            btnNext.setBackgroundColor(Color.parseColor("#006fff"));
-//
-//            btnNext.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Intent i = new Intent(DetailVocab.this, Topic_Vocab.class);
-//                    startActivity(i);
-//                }
-//            });
+        if (pos_current >= end) {
+
             pos_current = end;
 
             btnFinish.setVisibility(View.VISIBLE);
@@ -236,7 +217,9 @@ public class DetailVocab extends AppCompatActivity {
         int c = 0;
         for (int i = 0;i<v.size();i++)
         {
-            if (topic.compareTo(v.get(i).getTopic()) == 0) c=i;
+            if (topic.compareTo(v.get(i).getTopic()) == 0) {
+                c=i;
+            }
         }
         return c;
     }

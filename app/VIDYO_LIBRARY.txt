@@ -1,0 +1,1 @@
+Download vidyo SDK for Android and copy to app/libs

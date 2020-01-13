@@ -41,6 +41,7 @@ public class DetailVocabTest extends AppCompatActivity {
     int SWIPE_VELOCITY_THRESHOLD = 100;
 
     int pos_current, end;
+    String topic_current;
     Intent intent;
 
     @Override
@@ -62,17 +63,17 @@ public class DetailVocabTest extends AppCompatActivity {
 
         intent = getIntent();
         pos_current = intent.getIntExtra(Topic_Vocab_Test.Pos,0);
-
+        topic_current = Topic_Vocab_Test.topicTestArrayList.get(pos_current);
 
         for (int i = 0;i <Topic_Vocab_Test.vocabTestArrayList.size(); i++)
         {
-            if (Topic_Vocab_Test.vocabTestArrayList.get(i).getTopic() == Topic_Vocab_Test.topicTestArrayList.get(pos_current))
+            if (arrVocab.get(i).getTopic().compareTo(topic_current) == 0)
             {
                 pos_current = i;
                 break;
             }
         }
-        end = getEnd(Topic_Vocab_Test.topicTestArrayList.get(pos_current), arrVocab);
+        end = getEnd(topic_current, arrVocab);
         showDetail(pos_current);
 
         gestureDetector = new GestureDetector(this, new MyGesture());
@@ -88,7 +89,7 @@ public class DetailVocabTest extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tv_result.setText("Right: " + String.valueOf(count_right) + " - " + "Wrong: "+ String.valueOf(count_wrong));
+                tv_result.setText("Right: " + String.valueOf(count_right) + "\n" + "Wrong: "+ String.valueOf(count_wrong));
 
             }
         });
@@ -104,18 +105,16 @@ public class DetailVocabTest extends AppCompatActivity {
                 ed_answers.setText("");
                 tv_result.setText("");
 
-                String topic = tv_topic.getText().toString();
+
 
                 pos_current++;
-                if (pos_current > end)
+                if (pos_current >= end)
                 {
                     pos_current = end;
-                    Button btnFinish = findViewById(R.id.btn_finish);
-                    btnFinish.setVisibility(View.VISIBLE);
-//                    Toast.makeText(DetailVocabTest.this, "This is the last question", Toast.LENGTH_LONG).show();
+                    Toast.makeText(DetailVocabTest.this, "This is the last question", Toast.LENGTH_LONG).show();
                 }
                 else {
-                    while (arrVocab.get(pos_current).getTopic().compareTo(topic) != 0 && pos_current <= end) {
+                    while (arrVocab.get(pos_current).getTopic().compareTo(topic_current) != 0 && pos_current <= end) {
                         pos_current++;
                     }
                 }

@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static Button btn_NewMember, btn_OldMember, btn_Skip;
+    public static Button btn_NewMember, btn_OldMember;
+    public static LinearLayout btn_Skip;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

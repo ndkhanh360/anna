@@ -274,6 +274,8 @@ public class FullscreenActivity extends AppCompatActivity {
         Log.i("INFO","userName: "+userName);
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://devcchotot.herokuapp.com/" + eMail;
+        if (eMail == null)
+            url = "http://devcchotot.herokuapp.com/demoUser";
 
 // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
