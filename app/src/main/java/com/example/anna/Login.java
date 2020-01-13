@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,6 +50,7 @@ public class Login extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if (mUser != null) {
                     Intent intent = new Intent(Login.this, StartLearn.class);
+                    intent.putExtra("show_profile", 1);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 }
@@ -167,4 +169,10 @@ public class Login extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        Intent i = new Intent(Login.this, MainActivity.class);
+        startActivity(i);
+        return super.onKeyDown(keyCode, event);
+    }
 }
