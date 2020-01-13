@@ -3,7 +3,6 @@ package com.example.anna;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
@@ -13,8 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -26,8 +25,11 @@ public class DetailVocab extends AppCompatActivity {
     ImageView imageView;
 
     ArrayList<Vocabulary> arrVocab = new ArrayList<>();
+    ArrayList<Vocabulary> topicVocabs = new ArrayList<Vocabulary>();
     TextToSpeech textToSpeech;
     Vocabulary vocab;
+    ProgressBar progressBar;
+    String topic;
 
     public static final String Topic = "t";
     public static final String Word = "w";
@@ -60,6 +62,23 @@ public class DetailVocab extends AppCompatActivity {
 
         arrVocab = Topic_Vocab.vocabArrayList;
 
+        intent = getIntent();
+        pos_current = intent.getIntExtra(Topic_Vocab.Pos,0);
+
+        // get topic name
+        topic = Topic_Vocab.topicArrayList.get(pos_current).toString();
+        // get all vocabs belong to that topic
+        for (int i = 0;i <arrVocab.size(); i++)
+        {
+            if (arrVocab.get(i).getTopic().equals(topic))
+            {
+                topicVocabs.add(arrVocab.get(i));
+            }
+        }
+
+        // set vocab position in topic vocab
+        pos_current = 0;
+
         tv_topic = findViewById(R.id.tv_topic);
 //        tv_content = findViewById(R.id.tv_content);
         tv_save = findViewById(R.id.tv_word);
@@ -67,24 +86,11 @@ public class DetailVocab extends AppCompatActivity {
         ln = findViewById(R.id.ln_word);
         imageView = findViewById(R.id.image);
         btnNext = findViewById(R.id.btn_next);
-        btnFinish = findViewById(R.id.vocab_btn_finish);
-
-        intent = getIntent();
-        pos_current = intent.getIntExtra(Topic_Vocab.Pos,0);
-
-
-        for (int i = 0;i <arrVocab.size(); i++)
-        {
-            if (arrVocab.get(i).getTopic() == Topic_Vocab.topicArrayList.get(pos_current))
-            {
-                pos_current = i;
-                break;
-            }
-        }
+        progressBar = findViewById(R.id.vocab_progressBar);
+        start = 0;
+        end = topicVocabs.size();
+        progressBar.setMax(end);
         showDetail(pos_current, index);
-        start = pos_current;
-        end = getEnd(Topic_Vocab.topicArrayList.get(pos_current), arrVocab);
-
         gestureDetector = new GestureDetector(this, new MyGesture());
 
         ln.setOnTouchListener(new View.OnTouchListener() {
@@ -95,11 +101,6 @@ public class DetailVocab extends AppCompatActivity {
             }
         });
 
-    }
-
-    public void btn_onClick_VocabFinish(View view) {
-        Intent i = new Intent(DetailVocab.this, Topic_Vocab.class);
-        startActivity(i);
     }
 
     public void btn_onClick_VocabYouglish(View view) {
@@ -144,8 +145,10 @@ public class DetailVocab extends AppCompatActivity {
         // index = 1 -> word
         // index = 2 -> definition
         // index = 3 -> example
-        vocab = arrVocab.get(pos);
-        intent.putExtra(Topic, vocab.getTopic());
+        Log.d("pos", String.valueOf(pos)+","+String.valueOf(end));
+        progressBar.setProgress(pos+1);
+        vocab = topicVocabs.get(pos);
+        intent.putExtra(Topic, topic);
 
         intent.putExtra(Word, vocab.getWord());
         intent.putExtra(Mean, vocab.getMean());
@@ -191,91 +194,15 @@ public class DetailVocab extends AppCompatActivity {
     }
 
     public void btn_onClick_Next(View view) {
-        String topic = tv_topic.getText().toString();
-
         pos_current++;
-        if (pos_current > end) {
-            pos_current = end;
-
-            btnFinish.setVisibility(View.VISIBLE);
-//
-//            btnNext.setText("Finish");
-//            btnNext.setTextColor(Color.parseColor("#ffffff"));
-//            btnNext.setBackgroundResource(R.drawable.border);
-//            btnNext.setBackgroundColor(Color.parseColor("#006fff"));
-//
-//            btnNext.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Intent i = new Intent(DetailVocab.this, Topic_Vocab.class);
-//                    startActivity(i);
-//                }
-//            });
-        }
-        else {
-//            btnFinish.setVisibility(View.INVISIBLE);
-            while (arrVocab.get(pos_current).getTopic().compareTo(topic) != 0 && pos_current <= end) {
-                pos_current++;
-            }
-        }
-        index = 1;
-        showDetail(pos_current, index);
+        if (pos_current >= end) pos_current = end-1;
+        showDetail(pos_current, 1);
     }
 
     public void btn_onClick_Pre(View view) {
-        String topic = tv_topic.getText().toString();
-
         pos_current--;
-        if (pos_current < start) pos_current=start;
-        else {
-            while (arrVocab.get(pos_current).getTopic().compareTo(topic) != 0 && pos_current >= start) {
-                pos_current = pos_current - 1;
-            }
-        }
-        index = 1;
+        if (pos_current < 0) pos_current = 0;
         showDetail(pos_current, index);
-    }
-
-//    public void btn_KnowWord(View view) {
-//        String topic = tv_topic.getText().toString();
-//
-//        pos_current++;
-//        if (pos_current > end) {
-////            pos_current = end;
-////
-////            btnNext.setText("Finish");
-////            btnNext.setTextColor(Color.parseColor("#ffffff"));
-////            btnNext.setBackgroundResource(R.drawable.border);
-////            btnNext.setBackgroundColor(Color.parseColor("#006fff"));
-////
-////            btnNext.setOnClickListener(new View.OnClickListener() {
-////                @Override
-////                public void onClick(View v) {
-////                    Intent i = new Intent(DetailVocab.this, Topic_Vocab.class);
-////                    startActivity(i);
-////                }
-////            });
-//            pos_current = end;
-//
-//            btnFinish.setVisibility(View.VISIBLE);
-//        }
-//        else {
-//            while (arrVocab.get(pos_current).getTopic().compareTo(topic) != 0 && pos_current <= end) {
-//                pos_current++;
-//            }
-//        }
-//        index = 1;
-//        showDetail(pos_current, index);
-//    }
-
-    private int getEnd(String topic, ArrayList<Vocabulary> v)
-    {
-        int c = 0;
-        for (int i = 0;i<v.size();i++)
-        {
-            if (topic.compareTo(v.get(i).getTopic()) == 0) c=i;
-        }
-        return c;
     }
 
     public void onPause(){

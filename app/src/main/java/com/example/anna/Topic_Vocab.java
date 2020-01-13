@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -74,17 +75,17 @@ public class Topic_Vocab extends AppCompatActivity {
 
     }
 
-    public ArrayList<Vocabulary>initDataInArrayList()
-    {
-        ArrayList<Vocabulary> vocab = new ArrayList<>();
-        vocab.add(new Vocabulary("School", "Projector", "a piece of equipment that makes a film or picture appear on a screen or flat surface", "dbs"));
-        vocab.add(new Vocabulary("School", "Ruler", "fcds", "dbs"));
-        vocab.add(new Vocabulary("School", "Diploma", "bang cap", "dbasacds"));
-        vocab.add(new Vocabulary("School", "Assignment", "bai tap", "dbds"));
-        vocab.add(new Vocabulary("Restaurant", "Service", "fs", "dbs"));
-        vocab.add(new Vocabulary("Restaurant", "Waiter", "fs", "dbs"));
-        return vocab;
-    }
+//    public ArrayList<Vocabulary>initDataInArrayList()
+//    {
+//        ArrayList<Vocabulary> vocab = new ArrayList<>();
+//        vocab.add(new Vocabulary("School", "Projector", "a piece of equipment that makes a film or picture appear on a screen or flat surface", "dbs"));
+//        vocab.add(new Vocabulary("School", "Ruler", "fcds", "dbs"));
+//        vocab.add(new Vocabulary("School", "Diploma", "bang cap", "dbasacds"));
+//        vocab.add(new Vocabulary("School", "Assignment", "bai tap", "dbds"));
+//        vocab.add(new Vocabulary("Restaurant", "Service", "fs", "dbs"));
+//        vocab.add(new Vocabulary("Restaurant", "Waiter", "fs", "dbs"));
+//        return vocab;
+//    }
 
     public ArrayList<String> getTopic()
     {
@@ -129,5 +130,12 @@ public class Topic_Vocab extends AppCompatActivity {
             contact();
             prgDialog.dismiss();
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        Intent i = new Intent(Topic_Vocab.this, StartVocab.class);
+        startActivity(i);
+        return super.onKeyDown(keyCode, event);
     }
 }
