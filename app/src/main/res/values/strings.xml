@@ -6,7 +6,7 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
     <string name="sharedPref">tokenServer</string>
-
+    <string name="vocab_youglish"><u>See this word in real context</u></string>
     <string name="ready_string">Click below button to start recording...</string>
     <string-array name="sex_array">
         <item>Male</item>

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -13,16 +14,19 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class DetailVocab extends AppCompatActivity {
-    private TextView tv_save, tv_topic, tv_content;
+    private TextView tv_save, tv_topic;
+    String word;
     private  Button btnNext, btnFinish;
     ImageView imageView;
 
     ArrayList<Vocabulary> arrVocab = new ArrayList<>();
-
+    TextToSpeech textToSpeech;
     Vocabulary vocab;
 
     public static final String Topic = "t";
@@ -45,10 +49,19 @@ public class DetailVocab extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_vocab);
 
+        textToSpeech=new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status != TextToSpeech.ERROR) {
+                    textToSpeech.setLanguage(Locale.UK);
+                }
+            }
+        });
+
         arrVocab = Topic_Vocab.vocabArrayList;
 
         tv_topic = findViewById(R.id.tv_topic);
-        tv_content = findViewById(R.id.tv_content);
+//        tv_content = findViewById(R.id.tv_content);
         tv_save = findViewById(R.id.tv_word);
 
         ln = findViewById(R.id.ln_word);
@@ -89,6 +102,23 @@ public class DetailVocab extends AppCompatActivity {
         startActivity(i);
     }
 
+    public void btn_onClick_VocabYouglish(View view) {
+        Intent i = new Intent(DetailVocab.this, YouGlish.class);
+        String url = "https://youglish.com/pronounce/" + word.toLowerCase() + "/english";
+        i.putExtra("url", url);
+        Log.d("url", url);
+        startActivity(i);
+    }
+
+    public void btn_onClick_Play(View view) {
+        playVocabText();
+    }
+
+    private void playVocabText() {
+        String content = tv_save.getText().toString();
+        textToSpeech.speak(content, TextToSpeech.QUEUE_FLUSH, null);
+    }
+
     class MyGesture extends  GestureDetector.SimpleOnGestureListener
     {
         @Override
@@ -121,19 +151,24 @@ public class DetailVocab extends AppCompatActivity {
         intent.putExtra(Mean, vocab.getMean());
         intent.putExtra(Example, vocab.getExample());
 
+        if(textToSpeech !=null){
+            textToSpeech.stop();
+        }
+
         if (index == 1) {
             intent.putExtra(Content, "  Word  ");
             tv_topic.setText(intent.getStringExtra(Topic));
-            tv_content.setText(intent.getStringExtra(Content));
+//            tv_content.setText(intent.getStringExtra(Content));
             tv_save.setTextSize(40);
-            tv_save.setText(intent.getStringExtra(Word));
+            word = intent.getStringExtra(Word);
+            tv_save.setText(word);
             imageView.setImageResource(R.drawable.im_word);
         }
 
         if (index == 2) {
             intent.putExtra(Content, "  Definition  ");
             tv_topic.setText(intent.getStringExtra(Topic));
-            tv_content.setText(intent.getStringExtra(Content));
+//            tv_content.setText(intent.getStringExtra(Content));
             tv_save.setTextSize(20);
             tv_save.setText(intent.getStringExtra(Mean));
 
@@ -144,12 +179,14 @@ public class DetailVocab extends AppCompatActivity {
         if (index == 3) {
             intent.putExtra(Content, "  Example  ");
             tv_topic.setText(intent.getStringExtra(Topic));
-            tv_content.setText(intent.getStringExtra(Content));
+//            tv_content.setText(intent.getStringExtra(Content));
             tv_save.setTextSize(20);
             tv_save.setText(intent.getStringExtra(Example));
 
             imageView.setImageResource(R.drawable.im_example);
         }
+
+        playVocabText();
 
     }
 
@@ -199,37 +236,37 @@ public class DetailVocab extends AppCompatActivity {
         showDetail(pos_current, index);
     }
 
-    public void btn_KnowWord(View view) {
-        String topic = tv_topic.getText().toString();
-
-        pos_current++;
-        if (pos_current > end) {
+//    public void btn_KnowWord(View view) {
+//        String topic = tv_topic.getText().toString();
+//
+//        pos_current++;
+//        if (pos_current > end) {
+////            pos_current = end;
+////
+////            btnNext.setText("Finish");
+////            btnNext.setTextColor(Color.parseColor("#ffffff"));
+////            btnNext.setBackgroundResource(R.drawable.border);
+////            btnNext.setBackgroundColor(Color.parseColor("#006fff"));
+////
+////            btnNext.setOnClickListener(new View.OnClickListener() {
+////                @Override
+////                public void onClick(View v) {
+////                    Intent i = new Intent(DetailVocab.this, Topic_Vocab.class);
+////                    startActivity(i);
+////                }
+////            });
 //            pos_current = end;
 //
-//            btnNext.setText("Finish");
-//            btnNext.setTextColor(Color.parseColor("#ffffff"));
-//            btnNext.setBackgroundResource(R.drawable.border);
-//            btnNext.setBackgroundColor(Color.parseColor("#006fff"));
-//
-//            btnNext.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Intent i = new Intent(DetailVocab.this, Topic_Vocab.class);
-//                    startActivity(i);
-//                }
-//            });
-            pos_current = end;
-
-            btnFinish.setVisibility(View.VISIBLE);
-        }
-        else {
-            while (arrVocab.get(pos_current).getTopic().compareTo(topic) != 0 && pos_current <= end) {
-                pos_current++;
-            }
-        }
-        index = 1;
-        showDetail(pos_current, index);
-    }
+//            btnFinish.setVisibility(View.VISIBLE);
+//        }
+//        else {
+//            while (arrVocab.get(pos_current).getTopic().compareTo(topic) != 0 && pos_current <= end) {
+//                pos_current++;
+//            }
+//        }
+//        index = 1;
+//        showDetail(pos_current, index);
+//    }
 
     private int getEnd(String topic, ArrayList<Vocabulary> v)
     {
@@ -239,6 +276,14 @@ public class DetailVocab extends AppCompatActivity {
             if (topic.compareTo(v.get(i).getTopic()) == 0) c=i;
         }
         return c;
+    }
+
+    public void onPause(){
+        if(textToSpeech !=null){
+            textToSpeech.stop();
+            textToSpeech.shutdown();
+        }
+        super.onPause();
     }
 
 }

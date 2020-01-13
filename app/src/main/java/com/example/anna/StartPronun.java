@@ -17,6 +17,7 @@ public class StartPronun extends AppCompatActivity {
     public void btn_onClick_YouGlish(View view)
     {
         Intent i = new Intent(StartPronun.this, YouGlish.class);
+        i.putExtra("url", "https://youglish.com");
         startActivity(i);
     }
 }

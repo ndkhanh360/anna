@@ -23,7 +23,7 @@ public class StartLearn extends AppCompatActivity {
 
         btnVocab = findViewById(R.id.btnVoca);
         btnSpeaking = findViewById(R.id.btnSpeaking);
-        btnPronun = findViewById(R.id.btnPronun);
+//        btnPronun = findViewById(R.id.btnPronun);
 
         avatar= findViewById(R.id.imAvatar);
         tvTitle=findViewById(R.id.tvTitle);
@@ -50,13 +50,13 @@ public class StartLearn extends AppCompatActivity {
             }
         });
 
-        btnPronun.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(StartLearn.this, StartPronun.class);
-                startActivity(i);
-            }
-        });
+//        btnPronun.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(StartLearn.this, StartPronun.class);
+//                startActivity(i);
+//            }
+//        });
         btnSpeaking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

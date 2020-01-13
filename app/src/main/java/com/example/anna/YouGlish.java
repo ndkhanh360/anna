@@ -3,6 +3,7 @@ package com.example.anna;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -26,7 +27,9 @@ public class YouGlish extends AppCompatActivity {
             webSettings.setJavaScriptEnabled(true);
             myWebView.setWebViewClient(new MyWebViewClient());
 
-            myWebView.loadUrl("https://youglish.com/");
+            Intent intent = getIntent();
+            String url = intent.getStringExtra("url");
+            myWebView.loadUrl(url);
         } else {
             Toast.makeText(this.getBaseContext(), "No Internet connection!", Toast.LENGTH_LONG).show();
         }

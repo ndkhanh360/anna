@@ -72,47 +72,77 @@
         android:backgroundTint="#F7E3F8"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_content"
-            android:layout_width="wrap_content"
+<!--        <TextView-->
+<!--            android:id="@+id/tv_content"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="20sp"-->
+<!--            android:background="@color/colorAccent"-->
+<!--            android:textColor="#ffffff"-->
+<!--            android:text="  Word "-->
+<!--            android:textSize="25sp"-->
+<!--            android:textStyle="bold" />-->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20sp"
-            android:background="@color/colorAccent"
-            android:textColor="#ffffff"
-            android:text="  Word "
-            android:textSize="25sp"
-            android:textStyle="bold" />
-
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/vocab_btn_play"
+                android:onClick="btn_onClick_Play"
+                android:gravity="left"
+                android:layout_margin="5dp"
+                android:background="@drawable/play">
+            </Button>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_gravity="center_vertical"
+                android:padding="20dp"
+                android:id="@+id/vocab_btn_youglish"
+                android:textSize="12dp"
+                android:onClick="btn_onClick_VocabYouglish"
+                android:background="@android:color/transparent"
+                android:textStyle="italic"
+                android:textColor="#006fff"
+                android:text="@string/vocab_youglish">
+            </Button>
+        </LinearLayout>
         <TextView
             android:id="@+id/tv_word"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
+            android:padding="10dp"
             android:text="name"
             android:textColor="@color/colorAccent"
             android:textSize="20sp" />
+
     </LinearLayout>
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/im_word"
+        android:layout_margin="20dp"
         android:layout_below="@id/ln_word"
         android:id="@+id/image"
         android:layout_centerHorizontal="true"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/image"
-        android:layout_centerHorizontal="true"
-        android:text=" I know this word "
-        android:paddingHorizontal="10dp"
-        android:textColor="#ffffff"
-        android:background="@drawable/border"
-        android:backgroundTint="#006fff"
-        android:id="@+id/btnKnowWord"
-        android:onClick="btn_KnowWord"/>
+<!--    <Button-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/image"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:text=" I know this word "-->
+<!--        android:paddingHorizontal="10dp"-->
+<!--        android:textColor="#ffffff"-->
+<!--        android:background="@drawable/border"-->
+<!--        android:backgroundTint="#006fff"-->
+<!--        android:id="@+id/btnKnowWord"-->
+<!--        android:onClick="btn_KnowWord"/>-->
 
     <LinearLayout
         android:layout_width="wrap_content"
