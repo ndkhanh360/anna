@@ -54,9 +54,9 @@
         android:layout_below="@+id/tvName"
         android:layout_alignParentRight="true"
         android:layout_marginRight="30dp"
-        android:background="@drawable/gradient"
+        android:background="@android:color/transparent"
         android:text="submit"
-        android:textColor="#ffffff"
+        android:textColor="#006fff"
         android:onClick="btn_onClick_submit_mtp"
         android:id="@+id/btn_submit"/>
 
@@ -74,6 +74,7 @@
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:max="10"
             android:progress="5"
+            android:progressTint="#006fff"
             android:layout_marginVertical="10dp"
             android:layout_marginHorizontal="30dp">
         </ProgressBar>

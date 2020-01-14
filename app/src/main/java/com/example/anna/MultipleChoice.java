@@ -27,7 +27,6 @@ public class MultipleChoice extends AppCompatActivity {
     ProgressBar progressBar;
     Random rand = new Random();
     String topic, answer;
-    private View view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

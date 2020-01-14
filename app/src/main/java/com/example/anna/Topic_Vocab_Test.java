@@ -26,6 +26,7 @@ public class Topic_Vocab_Test extends AppCompatActivity {
 
     public static ArrayList<Vocabulary_Test> vocabTestArrayList = new ArrayList<>();
     public static ArrayList<String> topicTestArrayList = new ArrayList<>();
+    public static final String Pos = "pos";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,17 +53,6 @@ public class Topic_Vocab_Test extends AppCompatActivity {
         lvVocabTest.setAdapter(adapter);
     }
 
-    public ArrayList<Vocabulary_Test>initDataInArrayList()
-    {
-        ArrayList<Vocabulary_Test> vocab = new ArrayList<>();
-        vocab.add(new Vocabulary_Test("Education", "When giving answer1 presentation, it is important to ______ key terms.", "define"));
-        vocab.add(new Vocabulary_Test("Education", "An effective essay is not just descriptive but also __________", "evaluative"));
-        vocab.add(new Vocabulary_Test("Health", "When you're _________, you gotta drink the water", "dehydrated"));
-        vocab.add(new Vocabulary_Test("Health", "_________ agents can cause stomach upsets.", "infectious"));
-        vocab.add(new Vocabulary_Test("Education", "________ is the field studying money, industry and trade", "economics"));
-        return vocab;
-    }
-
     public ArrayList<String> getTopicTest()
     {
         ArrayList<String> topic = new ArrayList<>();
@@ -80,7 +70,7 @@ public class Topic_Vocab_Test extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(Topic_Vocab_Test.this, DetailVocabTest.class);
-                i.putExtra("pos", position);
+                i.putExtra(Pos, position);
                 startActivity(i);
             }
         });
@@ -101,6 +91,7 @@ public class Topic_Vocab_Test extends AppCompatActivity {
     private class LoadedVocabTest extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
+            Log.d("receive", "nhan dc data r neeeeeee");
             loadDataToListView();
             contact();
             prgDialog.dismiss();

@@ -9,12 +9,12 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class StartLearn extends AppCompatActivity {
 
-    Button btnVocab, btnSpeaking, btnPronun;
-    ImageView avatar;
+    Button btnVocab, btnSpeaking;
     TextView tvTitle;
 
     @Override
@@ -24,25 +24,17 @@ public class StartLearn extends AppCompatActivity {
 
         btnVocab = findViewById(R.id.btnVoca);
         btnSpeaking = findViewById(R.id.btnSpeaking);
-//        btnPronun = findViewById(R.id.btnPronun);
 
-        avatar= findViewById(R.id.imAvatar);
-        tvTitle=findViewById(R.id.tvTitle);
+        LinearLayout layout = findViewById(R.id.profile_layout);
 
         Intent intent = getIntent();
         int show_profile = intent.getIntExtra("show_profile", 0);
 
         if (show_profile == 1) {
             Log.i("Extra", "1");
-            ImageView iv = findViewById(R.id.imAvatar);
-            TextView tv = findViewById(R.id.tvProfile);
-            iv.setVisibility(View.VISIBLE);
-            tv.setVisibility(View.VISIBLE);
+            layout.setVisibility(View.VISIBLE);
         }
-        //avatar.setImageResource(getAvatarFromUser());
 
-        tvTitle.setText("Learn & Practice");
-        
         btnVocab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,13 +43,6 @@ public class StartLearn extends AppCompatActivity {
             }
         });
 
-//        btnPronun.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(StartLearn.this, StartPronun.class);
-//                startActivity(i);
-//            }
-//        });
         btnSpeaking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,13 +52,6 @@ public class StartLearn extends AppCompatActivity {
             }
         });
 
-    }
-
-    public void btn_onClick_Speaking(View view)
-    {
-        Intent i = new Intent(StartLearn.this, DashboardActivity.class);
-        i.putExtra("Uid","123");
-        startActivity(i);
     }
 
     @Override

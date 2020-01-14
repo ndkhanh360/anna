@@ -32,7 +32,7 @@ public class VocabTestService extends Service {
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
-                                    vocab_test.add(new Vocabulary_Test(document.getData().get("t").toString(), document.getData().get("q").toString(), document.getData().get("answer1").toString()));
+                                    vocab_test.add(new Vocabulary_Test(document.getData().get("t").toString(), document.getData().get("q").toString(), document.getData().get("a").toString()));
                                 }
                                 Topic_Vocab_Test.vocabTestArrayList = vocab_test;
                                 Log.d("vocab", Topic_Vocab_Test.vocabTestArrayList.get(0).toString());
