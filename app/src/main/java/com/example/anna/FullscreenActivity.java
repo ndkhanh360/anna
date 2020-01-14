@@ -91,6 +91,7 @@ public class FullscreenActivity extends AppCompatActivity {
     SharedPreferences.Editor sfEditor;
     private long userType;
     private String eMail;
+    private boolean skippable;
     /**
      * Some older devices needs a small delay between UI widget updates
      * and a change of the status and navigation bar.
@@ -208,7 +209,7 @@ public class FullscreenActivity extends AppCompatActivity {
         user = user.getInstance();
         Log.i("INFO", "onCreate: ok");
         mVisible = true;
-
+        skippable = true;
         isCaptionEnabled = false;
         String userName = null;
         sfEditor = getSharedPreferences(getResources().getString(R.string.sharedPref), MODE_PRIVATE).edit();
@@ -423,6 +424,7 @@ public class FullscreenActivity extends AppCompatActivity {
         if (videoType == 1){
             startService(recordService);
             Log.i("RECORDSTATE", "Record: ok");
+            skippable = false;
         }else if (videoType > 1){
             if (vcToken == null){
                 Log.i("ERROR", "Connect: NO TOKEN");
@@ -515,6 +517,8 @@ public class FullscreenActivity extends AppCompatActivity {
         inte.putExtra("videoType",videoType);
         inte.putExtra("Score",score);
         inte.putExtra("Email",eMail);
+        if (videoType == 1)
+            inte.putExtra("Skippable",skippable);
 //        inte.putExtra("CommentCount",comments.size());
 //        for (int i = 0; i < comments.size(); i++){
 //            inte.putExtra("Comment_"+String.valueOf(i),comments.get(i));
