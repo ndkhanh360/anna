@@ -3,6 +3,7 @@ package com.example.anna;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -15,6 +16,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SharedPreferences sp=getSharedPreferences("Login", MODE_PRIVATE);
+
+        String uid = sp.getString("Uid", null);
+        String email = sp.getString("Email", null);
+
+        // If user is logged in
+        if (email != null)
+        {
+            Intent intent = new Intent(MainActivity.this, StartLearn.class);
+            intent.putExtra("Email",email);
+            // Sending Email to Dashboard Activity using intent.
+
+            intent.putExtra("Uid",uid);
+            startActivity(intent);
+
+        }
 
         btn_NewMember = findViewById(R.id.buttonNew);
         btn_OldMember = findViewById(R.id.buttonOld);

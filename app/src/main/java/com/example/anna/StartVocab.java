@@ -59,10 +59,10 @@ public class StartVocab extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        Intent i = new Intent(StartVocab.this, StartLearn.class);
-        startActivity(i);
-        return super.onKeyDown(keyCode, event);
-    }
+//    @Override
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        Intent i = new Intent(StartVocab.this, StartLearn.class);
+//        startActivity(i);
+//        return super.onKeyDown(keyCode, event);
+//    }
 }

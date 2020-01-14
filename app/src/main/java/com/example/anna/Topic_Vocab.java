@@ -148,15 +148,15 @@ public class Topic_Vocab extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        Intent i;
-        if (test == 0) {
-            i = new Intent(Topic_Vocab.this, StartVocab.class);
-        } else {
-            i = new Intent(Topic_Vocab.this, StartVocab.class);
-        }
-        startActivity(i);
-        return super.onKeyDown(keyCode, event);
-    }
+//    @Override
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        Intent i;
+//        if (test == 0) {
+//            i = new Intent(Topic_Vocab.this, StartVocab.class);
+//        } else {
+//            i = new Intent(Topic_Vocab.this, StartVocab.class);
+//        }
+//        startActivity(i);
+//        return super.onKeyDown(keyCode, event);
+//    }
 }

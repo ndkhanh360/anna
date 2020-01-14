@@ -90,9 +90,11 @@ public class FullscreenActivity extends AppCompatActivity {
     private List<String> topics;
     SharedPreferences.Editor sfEditor;
     private long userType;
+    private String eMail;
+    private boolean skippable;
     /**
-     * Some older devices needs answer1 small delay between UI widget updates
-     * and answer1 change of the status and navigation bar.
+     * Some older devices needs a small delay between UI widget updates
+     * and a change of the status and navigation bar.
      */
     private static final int UI_ANIMATION_DELAY = 300;
     private final Handler mHideHandler = new Handler();
@@ -172,7 +174,7 @@ public class FullscreenActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://devcchotot.herokuapp.com/putTranscribe/" + doc;
 
-// Request answer1 string response from the provided URL.
+// Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -199,6 +201,7 @@ public class FullscreenActivity extends AppCompatActivity {
         Intent intent = getIntent();
         userType = intent.getIntExtra("userType",0);
         videoType = intent.getIntExtra("videoType",1);
+        eMail = intent.getStringExtra("Email");
         String topic = intent.getStringExtra("topic");
         if (videoType == 0)
             return;
@@ -206,7 +209,7 @@ public class FullscreenActivity extends AppCompatActivity {
         user = user.getInstance();
         Log.i("INFO", "onCreate: ok");
         mVisible = true;
-
+        skippable = true;
         isCaptionEnabled = false;
         String userName = null;
         sfEditor = getSharedPreferences(getResources().getString(R.string.sharedPref), MODE_PRIVATE).edit();
@@ -271,9 +274,11 @@ public class FullscreenActivity extends AppCompatActivity {
         }
         Log.i("INFO","userName: "+userName);
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://devcchotot.herokuapp.com/" + userName;
+        String url = "http://devcchotot.herokuapp.com/" + eMail;
+        if (eMail == null)
+            url = "http://devcchotot.herokuapp.com/demoUser";
 
-// Request answer1 string response from the provided URL.
+// Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -299,7 +304,7 @@ public class FullscreenActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://devcchotot.herokuapp.com/getTranscribe";
 
-// Request answer1 string response from the provided URL.
+// Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -419,6 +424,7 @@ public class FullscreenActivity extends AppCompatActivity {
         if (videoType == 1){
             startService(recordService);
             Log.i("RECORDSTATE", "Record: ok");
+            skippable = false;
         }else if (videoType > 1){
             if (vcToken == null){
                 Log.i("ERROR", "Connect: NO TOKEN");
@@ -456,7 +462,7 @@ public class FullscreenActivity extends AppCompatActivity {
             RequestQueue queue = Volley.newRequestQueue(this);
             String url = "http://devcchotot.herokuapp.com/nlp?sentence=" + sent;
 
-// Request answer1 string response from the provided URL.
+// Request a string response from the provided URL.
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                     new Response.Listener<String>() {
                         @Override
@@ -510,6 +516,9 @@ public class FullscreenActivity extends AppCompatActivity {
         Intent inte = new Intent(this,ScoreBoardActivity.class);
         inte.putExtra("videoType",videoType);
         inte.putExtra("Score",score);
+        inte.putExtra("Email",eMail);
+        if (videoType == 1)
+            inte.putExtra("Skippable",skippable);
 //        inte.putExtra("CommentCount",comments.size());
 //        for (int i = 0; i < comments.size(); i++){
 //            inte.putExtra("Comment_"+String.valueOf(i),comments.get(i));
@@ -581,7 +590,7 @@ public class FullscreenActivity extends AppCompatActivity {
         mControlsView.setVisibility(View.GONE);
         mVisible = false;
 
-        // Schedule answer1 runnable to remove the status and navigation bar after answer1 delay
+        // Schedule a runnable to remove the status and navigation bar after a delay
         mHideHandler.removeCallbacks(mShowPart2Runnable);
         mHideHandler.postDelayed(mHidePart2Runnable, UI_ANIMATION_DELAY);
     }
@@ -593,13 +602,13 @@ public class FullscreenActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
         mVisible = true;
 
-        // Schedule answer1 runnable to display UI elements after answer1 delay
+        // Schedule a runnable to display UI elements after a delay
         mHideHandler.removeCallbacks(mHidePart2Runnable);
         mHideHandler.postDelayed(mShowPart2Runnable, UI_ANIMATION_DELAY);
     }
 
     /**
-     * Schedules answer1 call to hide() in delay milliseconds, canceling any
+     * Schedules a call to hide() in delay milliseconds, canceling any
      * previously scheduled calls.
      */
     private void delayedHide(int delayMillis) {

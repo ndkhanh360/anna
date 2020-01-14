@@ -2,10 +2,10 @@ package com.example.anna;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,6 +28,7 @@ public class Login extends AppCompatActivity {
     FirebaseAuth.AuthStateListener mAuthListner;
     FirebaseUser mUser;
     String email, password;
+    private String eMail;
     ProgressDialog dialog;
     User user=null;
     public static final String userEmail="";
@@ -50,7 +51,6 @@ public class Login extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if (mUser != null) {
                     Intent intent = new Intent(Login.this, StartLearn.class);
-                    intent.putExtra("show_profile", 1);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 }
@@ -67,7 +67,6 @@ public class Login extends AppCompatActivity {
         LogInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 // Calling EditText is empty or no method.
                 userSign();
 
@@ -159,20 +158,21 @@ public class Login extends AppCompatActivity {
             finish();
         }
         else {
+            eMail = Email.getText().toString();
+            SharedPreferences sp=getSharedPreferences("Login", MODE_PRIVATE);
+            SharedPreferences.Editor Ed=sp.edit();
+            Ed.putString("Uid",users.getUid());
+            Ed.putString("Email",eMail);
+            Ed.putString("Password",Password.getText().toString());
+            Ed.commit();
             Email.getText().clear();
             Password.getText().clear();
             Intent intent = new Intent(Login.this, StartLearn.class);
-
+            intent.putExtra("Email",eMail);
             // Sending Email to Dashboard Activity using intent.
             intent.putExtra("Uid",users.getUid());
             startActivity(intent);
         }
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        Intent i = new Intent(Login.this, MainActivity.class);
-        startActivity(i);
-        return super.onKeyDown(keyCode, event);
-    }
 }

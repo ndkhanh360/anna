@@ -16,6 +16,7 @@ public class StartLearn extends AppCompatActivity {
 
     Button btnVocab, btnSpeaking;
     TextView tvTitle;
+    String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +29,8 @@ public class StartLearn extends AppCompatActivity {
         LinearLayout layout = findViewById(R.id.profile_layout);
 
         Intent intent = getIntent();
-        int show_profile = intent.getIntExtra("show_profile", 0);
-
-        if (show_profile == 1) {
-            Log.i("Extra", "1");
+        email = intent.getStringExtra("Email");
+        if (email != null && email.length() > 0) {
             layout.setVisibility(View.VISIBLE);
         }
 
@@ -54,11 +53,16 @@ public class StartLearn extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        Intent i = new Intent(StartLearn.this, MainActivity.class);
-        startActivity(i);
-        return super.onKeyDown(keyCode, event);
-    }
+//    @Override
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        Intent i = new Intent(StartLearn.this, MainActivity.class);
+//        startActivity(i);
+//        return super.onKeyDown(keyCode, event);
+//    }
 
+    public void btn_onClick_profile(View view) {
+        Intent i = new Intent(StartLearn.this, ProfileActivity.class);
+        i.putExtra("Email", email);
+        startActivity(i);
+    }
 }
