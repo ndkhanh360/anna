@@ -22,19 +22,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.SetOptions;
-import com.google.firestore.v1.WriteResult;
-import com.google.protobuf.Int32Value;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -68,6 +61,9 @@ public class ScoreBoardActivity extends AppCompatActivity {
     private String eMail;
     private DatabaseReference mDatabase;
     private DatabaseReference mCommentRef;
+
+    private  boolean skippable;
+
     private String myScore;
     private String myComment;
     @Override
@@ -101,6 +97,11 @@ public class ScoreBoardActivity extends AppCompatActivity {
     }
 
     public void OnSendComment(@Nullable View v){
+        if (videoType == 1){
+
+
+        }
+
         if (eMail == null || eMail.isEmpty()){
             Toast.makeText(this, "You must log in to do this", Toast.LENGTH_SHORT).show();
             onBackPressed();
@@ -140,11 +141,17 @@ public class ScoreBoardActivity extends AppCompatActivity {
             }
         });
 
+
+        ShowScoreScreen();
+    }
+
+    private void ShowScoreScreen() {
         setContentView(R.layout.activity_score_board);
-        textView = findViewById(R.id.scoreview);
-        listView = findViewById(R.id.listcommentview);
+        textView = (TextView) findViewById(R.id.scoreview);
+        listView = (ListView) findViewById(R.id.listcommentview);
         getScore();
         getComments();
+        showData();
     }
 
     @Override
@@ -163,7 +170,11 @@ public class ScoreBoardActivity extends AppCompatActivity {
             editScore = (EditText) findViewById(R.id.editScore);
         } else {
             int score= intent.getIntExtra("Score",0);
-            OnSendComment(null);
+            skippable = intent.getBooleanExtra("Skippable",true);
+            if (skippable){
+                onBackPressed();
+            }
+            ShowScoreScreen();
         }
 //        int commentCount=intent.getIntExtra("CommentCount",0);
 //
