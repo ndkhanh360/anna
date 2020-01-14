@@ -52,7 +52,7 @@ public class DashboardActivity extends AppCompatActivity {
     }
     private boolean SendTopic(){
         if (choosedTopic.size() == 0){
-            Toast.makeText(DashboardActivity.this, "Choose a topic", Toast.LENGTH_SHORT).show();
+            Toast.makeText(DashboardActivity.this, "Choose answer1 topic", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;

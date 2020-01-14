@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".StartVocab"
     android:gravity="center_horizontal"
+    android:background="@drawable/gradient"
     android:orientation="vertical">
 
     <TextView
@@ -15,30 +16,56 @@
         android:textSize="60sp"
         android:text="Vocabulary"
         android:fontFamily="@font/pattaya"
-        android:textColor="#006fff"
+        android:textColor="#ffffff"
         android:layout_marginTop="50sp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginVertical="20dp"
+        android:layout_margin="20dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <Button
+            android:layout_marginVertical="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button_gradient"
+            android:id="@+id/btnFlashcard"
+            android:text="Flashcard"
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            />
+        <Button
+            android:layout_marginVertical="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button_gradient"
+            android:id="@+id/btnListening"
+            android:textSize="20sp"
+            android:text="Listening"
+            android:textColor="#ffffff"/>
+        <Button
+            android:layout_marginVertical="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button_gradient"
+            android:id="@+id/btnMultiple"
+            android:textSize="20sp"
+            android:text="Multiple Choice"
+            android:textColor="#ffffff"/>
+        <Button
+            android:layout_marginVertical="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button_gradient"
+            android:id="@+id/btnFillIn"
+            android:textSize="20sp"
+            android:text="Fill in the blank"
+            android:textColor="#ffffff"/>
+    </LinearLayout>
 
-    <Button
-        android:layout_width="230sp"
-        android:layout_height="100sp"
-        android:layout_margin="60sp"
-        android:id="@+id/btnStudy"
-        android:textStyle="bold"
-        android:text="STUDY"
-        android:textSize="30sp"
-        android:textColor="#ffffff"
-        android:background="@drawable/border"
-        android:backgroundTint="#f6a2bf"/>
-
-    <Button
-        android:layout_width="230sp"
-        android:layout_height="100sp"
-        android:text="TEST"
-        android:id="@+id/btnTest"
-        android:textStyle="bold"
-        android:textSize="30sp"
-        android:textColor="#ffffff"
-        android:background="@drawable/border"
-        android:backgroundTint="#f6a2bf"/>
 
 </LinearLayout>

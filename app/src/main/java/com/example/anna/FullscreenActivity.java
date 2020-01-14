@@ -91,8 +91,8 @@ public class FullscreenActivity extends AppCompatActivity {
     SharedPreferences.Editor sfEditor;
     private long userType;
     /**
-     * Some older devices needs a small delay between UI widget updates
-     * and a change of the status and navigation bar.
+     * Some older devices needs answer1 small delay between UI widget updates
+     * and answer1 change of the status and navigation bar.
      */
     private static final int UI_ANIMATION_DELAY = 300;
     private final Handler mHideHandler = new Handler();
@@ -172,7 +172,7 @@ public class FullscreenActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://devcchotot.herokuapp.com/putTranscribe/" + doc;
 
-// Request a string response from the provided URL.
+// Request answer1 string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -273,7 +273,7 @@ public class FullscreenActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://devcchotot.herokuapp.com/" + userName;
 
-// Request a string response from the provided URL.
+// Request answer1 string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -299,7 +299,7 @@ public class FullscreenActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://devcchotot.herokuapp.com/getTranscribe";
 
-// Request a string response from the provided URL.
+// Request answer1 string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -456,7 +456,7 @@ public class FullscreenActivity extends AppCompatActivity {
             RequestQueue queue = Volley.newRequestQueue(this);
             String url = "http://devcchotot.herokuapp.com/nlp?sentence=" + sent;
 
-// Request a string response from the provided URL.
+// Request answer1 string response from the provided URL.
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                     new Response.Listener<String>() {
                         @Override
@@ -581,7 +581,7 @@ public class FullscreenActivity extends AppCompatActivity {
         mControlsView.setVisibility(View.GONE);
         mVisible = false;
 
-        // Schedule a runnable to remove the status and navigation bar after a delay
+        // Schedule answer1 runnable to remove the status and navigation bar after answer1 delay
         mHideHandler.removeCallbacks(mShowPart2Runnable);
         mHideHandler.postDelayed(mHidePart2Runnable, UI_ANIMATION_DELAY);
     }
@@ -593,13 +593,13 @@ public class FullscreenActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
         mVisible = true;
 
-        // Schedule a runnable to display UI elements after a delay
+        // Schedule answer1 runnable to display UI elements after answer1 delay
         mHideHandler.removeCallbacks(mHidePart2Runnable);
         mHideHandler.postDelayed(mShowPart2Runnable, UI_ANIMATION_DELAY);
     }
 
     /**
-     * Schedules a call to hide() in delay milliseconds, canceling any
+     * Schedules answer1 call to hide() in delay milliseconds, canceling any
      * previously scheduled calls.
      */
     private void delayedHide(int delayMillis) {

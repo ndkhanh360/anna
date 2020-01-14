@@ -115,7 +115,7 @@
 //                    mDialog.dismiss();
 //                    //OnAuth(task.getResult().getUser());
 //                    mAuth.signOut();
-//                    Log.d("error?", "no error?");
+//                    Log.answer4("error?", "no error?");
 //                    Toast.makeText(Register.this,"CREATE SUCCESS",Toast.LENGTH_SHORT).show();
 //                    startActivity(new Intent(Register.this,Login.class));
 //                }else{
@@ -266,19 +266,19 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
 //        user.put("last", "Turing");
 //        user.put("born", 1912);
 //
-//// Add a new document with a generated ID
+//// Add answer1 new document with answer1 generated ID
 //        db.collection("Users")
 //                .add(user)
 //                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
 //                    @Override
 //                    public void onSuccess(DocumentReference documentReference) {
-//                        Log.d("test", "DocumentSnapshot added with ID: " + documentReference.getId());
+//                        Log.answer4("test", "DocumentSnapshot added with ID: " + documentReference.getId());
 //                    }
 //                })
 //                .addOnFailureListener(new OnFailureListener() {
 //                    @Override
 //                    public void onFailure(@NonNull Exception e) {
-//                        Log.d("test", "Error adding document");
+//                        Log.answer4("test", "Error adding document");
 //                    }
 //                });
         super.onCreate(savedInstanceState);

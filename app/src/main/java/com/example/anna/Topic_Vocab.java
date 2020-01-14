@@ -45,6 +45,7 @@ public class Topic_Vocab extends AppCompatActivity {
     private ProgressDialog prgDialog;
     ListView lvVocab;
     VocabAdapter adapter;
+    int test = 0, listening, mtp;
 
     public static ArrayList<Vocabulary> vocabArrayList = new ArrayList<>();
     public static ArrayList<String> topicArrayList = new ArrayList<>();
@@ -56,6 +57,11 @@ public class Topic_Vocab extends AppCompatActivity {
         this.prgDialog = new ProgressDialog(this);
         this.loaded = new LoadedVocab();
         this.loadVocab();
+
+        Intent intent = getIntent();
+        test = intent.getIntExtra("test", 0);
+        listening = intent.getIntExtra("listening", 0);
+        mtp = intent.getIntExtra("mtp", 0);
     }
     @Override
     protected void onPostResume() {
@@ -78,7 +84,7 @@ public class Topic_Vocab extends AppCompatActivity {
 //    public ArrayList<Vocabulary>initDataInArrayList()
 //    {
 //        ArrayList<Vocabulary> vocab = new ArrayList<>();
-//        vocab.add(new Vocabulary("School", "Projector", "a piece of equipment that makes a film or picture appear on a screen or flat surface", "dbs"));
+//        vocab.add(new Vocabulary("School", "Projector", "answer1 piece of equipment that makes answer1 film or picture appear on answer1 screen or flat surface", "dbs"));
 //        vocab.add(new Vocabulary("School", "Ruler", "fcds", "dbs"));
 //        vocab.add(new Vocabulary("School", "Diploma", "bang cap", "dbasacds"));
 //        vocab.add(new Vocabulary("School", "Assignment", "bai tap", "dbds"));
@@ -103,7 +109,17 @@ public class Topic_Vocab extends AppCompatActivity {
         lvVocab.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(Topic_Vocab.this, DetailVocab.class);
+                Intent i = new Intent();
+                if (test == 0) {
+                    i = new Intent(Topic_Vocab.this, DetailVocab.class);
+
+                } else {
+                    if (listening==1)
+                        i = new Intent(Topic_Vocab.this, ListeningTest.class);
+                    else if (mtp==1)
+                        i = new Intent(Topic_Vocab.this, MultipleChoice.class);
+                }
+
                 i.putExtra(Pos, position);
                 startActivity(i);
             }
@@ -134,7 +150,12 @@ public class Topic_Vocab extends AppCompatActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        Intent i = new Intent(Topic_Vocab.this, StartVocab.class);
+        Intent i;
+        if (test == 0) {
+            i = new Intent(Topic_Vocab.this, StartVocab.class);
+        } else {
+            i = new Intent(Topic_Vocab.this, StartVocab.class);
+        }
         startActivity(i);
         return super.onKeyDown(keyCode, event);
     }

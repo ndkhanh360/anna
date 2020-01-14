@@ -33,7 +33,7 @@ public class DetailVocabTest extends AppCompatActivity {
 
     public static final String Topic = "t";
     public static final String Questions = "q";
-    public static final String Answers = "a";
+    public static final String Answers = "answer1";
 
 
     GestureDetector gestureDetector;
@@ -61,7 +61,7 @@ public class DetailVocabTest extends AppCompatActivity {
         btnSubmit = findViewById(R.id.btn_submit);
 
         intent = getIntent();
-        pos_current = intent.getIntExtra(Topic_Vocab_Test.Pos,0);
+        pos_current = intent.getIntExtra("pos",0);
 
 
         for (int i = 0;i <Topic_Vocab_Test.vocabTestArrayList.size(); i++)

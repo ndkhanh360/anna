@@ -16,6 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Locale;
 
 public class DetailVocab extends AppCompatActivity {
@@ -35,7 +36,7 @@ public class DetailVocab extends AppCompatActivity {
     public static final String Word = "w";
     public static final String Mean = "m";
     public static final String Example = "e";
-    public static final String Content = "c";
+    public static final String Content = "answer3";
 
     GestureDetector gestureDetector;
     int SWIPE_THRESHOLD = 100;
@@ -76,6 +77,7 @@ public class DetailVocab extends AppCompatActivity {
             }
         }
 
+        Collections.shuffle(topicVocabs);
         // set vocab position in topic vocab
         pos_current = 0;
 

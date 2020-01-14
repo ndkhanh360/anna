@@ -76,7 +76,7 @@ public class ScoreBoardActivity extends AppCompatActivity {
         String url = "http://devcchotot.herokuapp.com/user/getScore";
         score = (new Random()).nextInt(3) + 4;
         return;
-// Request a string response from the provided URL.
+// Request answer1 string response from the provided URL.
 //        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
 //                new Response.Listener<String>() {
 //                    @Override
@@ -105,7 +105,7 @@ public class ScoreBoardActivity extends AppCompatActivity {
             comments.add("Need more complex words");
         }
         return;
-//// Request a string response from the provided URL.
+//// Request answer1 string response from the provided URL.
 //        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
 //                new Response.Listener<String>() {
 //                    @Override

@@ -16,8 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-
+        <activity android:name=".ListeningTest"></activity>
+        <activity android:name=".MultipleChoice" />
         <activity android:name=".StartPronun" />
         <activity android:name=".YouGlish" />
         <activity android:name=".Topic_Vocab_Test" />
@@ -30,11 +30,11 @@
         <activity android:name=".StartLearn" />
         <activity android:name=".Login" />
         <activity android:name=".DashboardActivity" />
-        <activity android:name=".FullscreenActivity"
+        <activity
+            android:name=".FullscreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:theme="@style/AppTheme" />
         <activity android:name=".ScoreBoardActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
