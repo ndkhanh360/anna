@@ -131,7 +131,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/buttonUpdateProfile"
         android:layout_marginTop="6dp"
-        android:onClick="OnLogoutProfileClicked"
+        android:onClick="OnLogOutClick"
         android:text="Log out" />
 
     <Button

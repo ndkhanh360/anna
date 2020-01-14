@@ -2,6 +2,7 @@ package com.example.anna;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,7 +18,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuth;atus
+
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
@@ -37,6 +39,9 @@ public class ProfileActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private String eMail;
     private String idStr;
+    //khai bao
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +52,10 @@ public class ProfileActivity extends AppCompatActivity {
         describeText = (EditText) findViewById(R.id.editDescription);
         sexSpinner = (Spinner) findViewById(R.id.sexSpinner);
         Intent i = getIntent();
+
+//code trong onCreate
+        mAuth = FirebaseAuth.getInstance();
+
         eMail = i.getStringExtra("Email");
         db = FirebaseFirestore.getInstance();
         db.collection("Users").get()
@@ -138,8 +147,25 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
+    public void OnLogOutClick(View v){
+        SharedPreferences sp= getSharedPreferences("Login", MODE_PRIVATE);
+        SharedPreferences.Editor Ed=sp.edit();
+        Ed.putString("Uid","");
+        Ed.putString("Email","");
+        Ed.putString("Password","");
+        Ed.commit();
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
+
 
     public void OnDelAcc(View v){
+        SharedPreferences sp= getSharedPreferences("Login", MODE_PRIVATE);
+        SharedPreferences.Editor Ed=sp.edit();
+        Ed.putString("Uid","");
+        Ed.putString("Email","");
+        Ed.putString("Password","");
         db = FirebaseFirestore.getInstance();
         db.collection("Users").document(idStr).delete();
 
@@ -162,7 +188,4 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
-    public void OnLogoutProfileClicked(View view) {
-
-    }
 }
