@@ -172,7 +172,7 @@ public class FullscreenActivity extends AppCompatActivity {
 
     private void putTranscribe(String doc) {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://devcchotot.herokuapp.com/putTranscribe/" + doc;
+        String url = "http://anna-eng.herokuapp.com/putTranscribe/" + doc;
 
 // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -274,9 +274,9 @@ public class FullscreenActivity extends AppCompatActivity {
         }
         Log.i("INFO","userName: "+userName);
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://devcchotot.herokuapp.com/" + eMail;
+        String url = "http://anna-eng.herokuapp.com/token/" + eMail;
         if (eMail == null)
-            url = "http://devcchotot.herokuapp.com/demoUser";
+            url = "http://anna-eng.herokuapp.com/token/demoUser";
 
 // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -302,7 +302,7 @@ public class FullscreenActivity extends AppCompatActivity {
 
     private void getTranscribe(){
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://devcchotot.herokuapp.com/getTranscribe";
+        String url = "http://anna-eng.herokuapp.com/getTranscribe";
 
 // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -421,10 +421,10 @@ public class FullscreenActivity extends AppCompatActivity {
                 Disconnect(null);
             }
         }.start();
+        skippable = false;
         if (videoType == 1){
             startService(recordService);
             Log.i("RECORDSTATE", "Record: ok");
-            skippable = false;
         }else if (videoType > 1){
             if (vcToken == null){
                 Log.i("ERROR", "Connect: NO TOKEN");
@@ -460,7 +460,7 @@ public class FullscreenActivity extends AppCompatActivity {
         res = 0;
         for(String sent: sentences){
             RequestQueue queue = Volley.newRequestQueue(this);
-            String url = "http://devcchotot.herokuapp.com/nlp?sentence=" + sent;
+            String url = "http://anna-eng.herokuapp.com/nlp?sentence=" + sent;
 
 // Request a string response from the provided URL.
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -517,8 +517,7 @@ public class FullscreenActivity extends AppCompatActivity {
         inte.putExtra("videoType",videoType);
         inte.putExtra("Score",score);
         inte.putExtra("Email",eMail);
-        if (videoType == 1)
-            inte.putExtra("Skippable",skippable);
+        inte.putExtra("Skippable",skippable);
 //        inte.putExtra("CommentCount",comments.size());
 //        for (int i = 0; i < comments.size(); i++){
 //            inte.putExtra("Comment_"+String.valueOf(i),comments.get(i));

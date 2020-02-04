@@ -164,16 +164,16 @@ public class ScoreBoardActivity extends AppCompatActivity {
         mCommentRef = mDatabase.getRef().child("Speakings");
         SharedPreferences sp = getSharedPreferences("Login", MODE_PRIVATE);
         eMail = sp.getString("Email", null);
+        skippable = intent.getBooleanExtra("Skippable",true);
+        if (skippable){
+            onBackPressed();
+        }
         if (videoType == 2) {
             setContentView(R.layout.activity_speaking_comment);
             editComment = (EditText) findViewById(R.id.editComment);
             editScore = (EditText) findViewById(R.id.editScore);
         } else {
             int score= intent.getIntExtra("Score",0);
-            skippable = intent.getBooleanExtra("Skippable",true);
-            if (skippable){
-                onBackPressed();
-            }
             ShowScoreScreen();
         }
 //        int commentCount=intent.getIntExtra("CommentCount",0);

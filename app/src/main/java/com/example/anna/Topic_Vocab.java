@@ -62,6 +62,7 @@ public class Topic_Vocab extends AppCompatActivity {
         IntentFilter filter = new IntentFilter("LOADED");
         registerReceiver(this.loaded, filter);
     }
+
     public void loadDataToListView()
     {
         lvVocab = findViewById(R.id.lvVocab);

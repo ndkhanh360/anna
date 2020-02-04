@@ -3,5 +3,6 @@
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">192.168.43.109</domain>
         <domain includeSubdomains="true">devcchotot.herokuapp.com</domain>
+        <domain includeSubdomains="true">anna-eng.herokuapp.com</domain>
     </domain-config>
 </network-security-config>
